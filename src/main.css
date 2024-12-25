@@ -1,0 +1,53 @@
+/* Custom styles and utilities */
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Team color utilities */
+.team-barbarians { background-color: var(--barbarian-color); }
+.team-giants { background-color: var(--giant-color); }
+.team-pekkas { background-color: var(--pekka-color); }
+.team-wizards { background-color: var(--wizard-color); }
+
+/* Layout utilities */
+.page-container {
+  @apply p-4 lg:ml-64;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-md p-4;
+}
+
+/* Animation utilities */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+} 
