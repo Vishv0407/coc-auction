@@ -31,14 +31,14 @@ app.use('/api/teams', teamRoutes);
 
 // WebSocket connection
 io.on('connection', (socket) => {
-  console.log('Client connected');
+  // console.log('Client connected');
   
   socket.on('playerSold', (data) => {
     io.emit('playerUpdated', data);
   });
 
   socket.on('disconnect', () => {
-    console.log('Client disconnected');
+    // console.log('Client disconnected');
   });
 });
 
