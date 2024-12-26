@@ -158,7 +158,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:pl-64 pt-20 lg:pt-0">
+    <div className="min-h-screen bg-gray-50 lg:pl-64 pt-16 lg:pt-0">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Team Wallets Section */}
@@ -213,7 +213,7 @@ const Admin = () => {
 
         {/* Players Section */}
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex-col gap-3 md:gap-0 md:flex-row flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">
               Players ({filteredPlayers.length})
             </h2>
