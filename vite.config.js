@@ -1,8 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import dotenv from 'dotenv';
 
-// https://vite.dev/config/
+// Load environment variables
+dotenv.config();
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -14,11 +17,11 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: import.meta.env.VITE_API_URL,
+        target: process.env.VITE_API_URL || 'http://localhost:5000', // Fallback to localhost if not defined
         changeOrigin: true,
       },
       '/socket.io': {
-        target: import.meta.env.VITE_API_URL,
+        target: process.env.VITE_API_URL || 'http://localhost:5000',
         changeOrigin: true,
         ws: true,
       },
