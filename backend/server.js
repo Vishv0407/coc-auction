@@ -14,11 +14,24 @@ const io = new Server(server, {
   }
 });
 
+const allowedOrigins = [process.env.BACKEND_URL, process.env.FRONTEND_URL, 'http://localhost:3000']; // Add all allowed origins
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // Allow cookies or authorization headers
+};
+
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Import routes

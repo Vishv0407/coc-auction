@@ -158,7 +158,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:pl-64">
+    <div className="min-h-screen bg-gray-50 lg:pl-64 pt-20 lg:pt-0">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Team Wallets Section */}

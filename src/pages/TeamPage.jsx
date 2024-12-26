@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useWebSocket } from '../context/WebSocketContext';
 import { teamData } from '../constants/teamData';
-import { FaSearch, FaSort, FaHome, FaUser, FaCrown, FaUserTie } from 'react-icons/fa';
+import { FaSearch, FaSort, FaArrowLeft, FaUser, FaCrown, FaUserTie } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import playersData from '../data/players.json';
 import { SiElixir } from "react-icons/si";
@@ -13,6 +13,9 @@ const TeamPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('price');
   const [allPlayers, setAllPlayers] = useState([]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const team = teamData[teamName.charAt(0).toUpperCase() + teamName.slice(1)];
 
@@ -46,23 +49,32 @@ const TeamPage = () => {
     }
   };
 
+  // Function to handle navigation to the last page
+  const goBack = () => {
+    if (location.state?.from) {
+      navigate(location.state.from); // Navigate to the stored 'from' state
+    } else {
+      navigate(-1); // Go back in history if no state is available
+    }
+  };
+
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${team.color} bg-opacity-50 lg:pl-64`}>
+    <div className={`min-h-screen bg-gradient-to-br ${team.color} bg-opacity-50 lg:pl-64 pt-8 lg:pt-0`}>
       {/* Back Button */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         className="fixed top-20 hidden lg:block lg:left-72 z-10 lg:top-4"
       >
-        <Link
-          to="/"
-          className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm 
-                     px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all
-                     transform hover:scale-105"
-        >
-          <FaHome className="text-gray-700" />
-          <span className="font-semibold text-gray-700">Home</span>
-        </Link>
+        <button
+        onClick={goBack}
+        className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm 
+                  px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all
+                  transform hover:scale-105"
+      >
+        <FaArrowLeft className="text-gray-700" />
+        <span className="font-semibold text-gray-700">Back</span>
+      </button>
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 py-16">
@@ -79,7 +91,7 @@ const TeamPage = () => {
               className="w-32 h-32 rounded-xl"
             />
           </div>
-          <h1 className="text-6xl font-bold bg-clip-text text-transparent 
+          <h1 className="text-5xl font-bold bg-clip-text text-transparent 
                          bg-gradient-to-r from-gray-700 to-gray-900 
                          tracking-wider uppercase mb-4">
             {teamName}

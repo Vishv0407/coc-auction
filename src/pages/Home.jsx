@@ -15,7 +15,7 @@ const Home = () => {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:pl-64 pt-8">
+    <div className="min-h-screen bg-gray-50 p-4 lg:pl-[17rem] pt-20 lg:pt-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
@@ -86,17 +86,17 @@ const Home = () => {
                 <Link
                   key={teamName}
                   to={`/teams/${teamName.toLowerCase()}`}
-                  className={`${data.color} rounded-xl p-6 shadow-lg
+                  className={`${data.color} rounded-xl p-4 shadow-lg
                     transform hover:scale-105 transition-all duration-300
                     cursor-pointer group`}
                 >
-                  <div className="flex items-center space-x-4 mb-4">
+                  <div className="flex items-center space-x-2 mb-4">
                     <img 
                       src={data.icon} 
                       alt={teamName} 
-                      className="w-12 h-12 transform group-hover:scale-110 transition-transform" 
+                      className="w-9 h-9 transform group-hover:scale-110 transition-transform" 
                     />
-                    <h3 className="text-white text-xl font-bold">{teamName}</h3>
+                    <h3 className="text-white text-lg font-bold">{teamName}</h3>
                   </div>
                   
                   <div className="text-white">

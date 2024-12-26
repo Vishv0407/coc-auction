@@ -32,7 +32,7 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:pl-72 pt-8">
+    <div className="min-h-screen bg-gray-50 p-4 lg:pl-72 pt-20 lg:pt-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -78,8 +78,8 @@ const Dashboard = () => {
                 className={`${data.color} rounded-xl p-4 shadow-lg
                   transform hover:scale-105 transition-all duration-300`}
               >
-                <div className="flex items-center space-x-3 mb-3">
-                  <img src={data.icon} alt={teamName} className="w-12 h-12" />
+                <div className="flex items-center space-x-2 mb-3">
+                  <img src={data.icon} alt={teamName} className="w-9 h-9" />
                   <div>
                     <h3 className="text-white font-bold text-lg">{teamName}</h3>
                     <p className="text-white text-sm">Players: {teamPlayers.length}</p>
