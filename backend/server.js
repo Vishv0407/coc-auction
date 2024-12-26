@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
   });
 });
 
-app.get("/", (res) => {
+app.get("/", (req,res) => {
   return res.json({
       success: true,
       message: "Boooooooooom, your server is started"
