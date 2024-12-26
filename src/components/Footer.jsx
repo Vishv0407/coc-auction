@@ -3,7 +3,7 @@ import { FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-800 shadow-lg mt-auto">
+    <footer className="bg-white dark:bg-[#010815] shadow-lg mt-auto">
       <div className="max-w-7xl mx-auto py-4 px-4">
         <div className="flex justify-center items-center space-x-2 text-lg text-gray-600 dark:text-gray-300">
           <span>Created by</span>

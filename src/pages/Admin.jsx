@@ -76,9 +76,12 @@ const Admin = () => {
   };
 
   // Custom toast style for gray background
+  const isDarkTheme = document.documentElement.classList.contains('dark');
+
+// Custom toast style for both themes
   const toastStyle = {
-    background: "#374151", // Tailwind's gray-700
-    color: "#FFFFFF", // White text for contrast
+    background: isDarkTheme ? "#FFFFFF" : "#374151", // White for dark mode, gray-700 for light mode
+    color: isDarkTheme ? "#000000" : "#FFFFFF", // Black text for dark mode, white for light mode
     fontSize: "21px",
   };
 
@@ -158,12 +161,14 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:pl-64 pt-16 lg:pt-0">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-4 lg:pl-64 pt-20 lg:pt-8">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Team Wallets Section */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-4">Team Balances</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
+            Team Balances
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(teamData).map(([teamName, data]) => {
               const remainingBalance = getTeamBalance(teamName);
@@ -212,9 +217,9 @@ const Admin = () => {
         </div>
 
         {/* Players Section */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
           <div className="flex-col gap-3 md:gap-0 md:flex-row flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
               Players ({filteredPlayers.length})
             </h2>
             <div className="relative">
@@ -222,7 +227,8 @@ const Admin = () => {
               <input
                 type="text"
                 placeholder="Search players..."
-                className="w-64 pl-10 p-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                className="w-64 pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
+                           dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -287,9 +293,9 @@ const Admin = () => {
         {/* Sell Modal - Now Larger */}
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               <div className="flex justify-between items-start mb-6">
-                <h2 className="text-3xl font-bold text-gray-800">
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
                   {selectedPlayer.sold ? "Update Player" : "Sell Player"}
                 </h2>
                 <button
@@ -301,30 +307,37 @@ const Admin = () => {
               </div>
 
               <div className="space-y-6">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-300 mb-2">
                     {selectedPlayer.name}
                   </h3>
-                  <p className="text-gray-600 text-lg capitalize">
+                  <p className="text-gray-600 text-lg capitalize dark:text-gray-400">
                     {selectedPlayer.position}
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-lg font-medium text-gray-700 mb-2">
+                  <label className="block text-lg font-medium text-gray-700 mb-2 dark:text-gray-300">
                     Price
                   </label>
                   <input
-                    type="number"
-                    className="w-full p-4 text-xl border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    type="text"
+                    className="w-full pl-6 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
+                              dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
                     value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        setPrice(value);
+                      }
+                    }}
                     placeholder="Enter amount"
                   />
+
                 </div>
 
                 <div>
-                  <label className="block text-lg font-medium text-gray-700 mb-2">
+                  <label className="block text-lg font-medium text-gray-700 mb-2 dark:text-gray-300">
                     Select Team
                   </label>
                   <div className="grid grid-cols-2 gap-4">
@@ -336,7 +349,7 @@ const Admin = () => {
                         <button
                           key={teamName}
                           className={`${data.color} p-4 rounded-lg text-white
-            ${selectedTeam === teamName ? "ring-4 ring-blue-500" : ""}
+            ${selectedTeam === teamName ? "ring-4 ring-blue-500 dark:ring-white bg-opacity-100"  : "bg-opacity-80"}
             hover:opacity-90 transition-all duration-300`}
                           onClick={() => setSelectedTeam(teamName)}
                         >
@@ -366,7 +379,7 @@ const Admin = () => {
                 </div>
 
                 <button
-                  className="w-full p-4 text-xl bg-green-500 text-white rounded-lg
+                  className="w-full p-4 text-xl bg-green-500 dark:bg-green-500 dark:hover:bg-green-600 text-white rounded-lg
                     hover:bg-green-600 transition-colors disabled:bg-gray-300
                     font-bold mt-4"
                   onClick={handleSubmit}

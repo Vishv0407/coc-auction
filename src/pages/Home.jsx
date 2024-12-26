@@ -15,7 +15,7 @@ const Home = () => {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:pl-[17rem] pt-20 lg:pt-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-4 lg:pl-[17rem] pt-20 lg:pt-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
@@ -29,7 +29,7 @@ const Home = () => {
 
         {/* Top Bids Section */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 flex items-center">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 flex items-center">
             <FaTrophy className="text-yellow-500 mr-2" />
             Highest Bids
           </h2>
@@ -72,7 +72,7 @@ const Home = () => {
 
         {/* Teams Overview */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-6 flex items-center">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 flex items-center">
             <FaUsers className="text-blue-500 mr-2" />
             Teams Overview
           </h2>
@@ -125,32 +125,32 @@ const Home = () => {
         </div>
 
         {/* Quick Stats */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-2xl font-bold mb-6 flex items-center">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 flex items-center">
             <FaCoins className="text-green-500 mr-2" />
             Auction Stats
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-gray-600">Total Players</p>
-              <p className="text-2xl font-bold">{soldPlayers.length}</p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <p className="text-gray-600 dark:text-gray-400">Total Players</p>
+              <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">{soldPlayers.length}</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-gray-600">Sold Players</p>
-              <p className="text-2xl font-bold">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <p className="text-gray-600 dark:text-gray-400">Sold Players</p>
+              <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">
                 {soldPlayers.filter(p => p.sold).length}
               </p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-gray-600">Total Spent</p>
-              <div className="text-2xl font-bold flex gap-[1px] items-center">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <p className="text-gray-600 dark:text-gray-400">Total Spent</p>
+              <div className="text-2xl font-bold flex gap-[1px] items-center dark:text-gray-200">
               <SiElixir className='text-[#E11ADB] text-[20px] rotate-[25deg]'/>
               {soldPlayers.reduce((sum, p) => sum + (p.price || 0), 0).toLocaleString()}
               </div>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-gray-600">Average Price</p>
-              <div className="text-2xl font-bold flex gap-[1px] items-center">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+              <p className="text-gray-600 dark:text-gray-400">Average Price</p>
+              <div className="text-2xl font-bold flex gap-[1px] items-center dark:text-gray-200">
               <SiElixir className='text-[#E11ADB] text-[20px] rotate-[25deg]'/>
               {Math.round(soldPlayers.reduce((sum, p) => sum + (p.price || 0), 0) / 
                   (soldPlayers.filter(p => p.sold).length || 1)).toLocaleString()}

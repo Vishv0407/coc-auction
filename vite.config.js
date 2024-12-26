@@ -39,5 +39,6 @@ export default defineConfig({
   define: {
     // If you need to use process.env in your app
     'process.env': {}
-  }
+  },
+  darkMode: 'class',
 })

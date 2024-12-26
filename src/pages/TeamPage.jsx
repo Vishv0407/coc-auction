@@ -68,12 +68,12 @@ const TeamPage = () => {
       >
         <button
         onClick={goBack}
-        className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm 
+        className="flex items-center space-x-2 bg-white/90 dark:bg-gray-800 backdrop-blur-sm 
                   px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all
                   transform hover:scale-105"
       >
-        <FaArrowLeft className="text-gray-700" />
-        <span className="font-semibold text-gray-700">Back</span>
+        <FaArrowLeft className="text-gray-700 dark:text-gray-300" />
+        <span className="font-semibold text-gray-700 dark:text-gray-300">Back</span>
       </button>
       </motion.div>
 
@@ -96,7 +96,7 @@ const TeamPage = () => {
                          tracking-wider uppercase mb-4">
             {teamName}
           </h1>
-          <div className="h-1 w-32 mx-auto bg-gradient-to-r from-gray-300 to-gray-500 rounded-full mb-8" />
+          <div className="h-1 w-32 mx-auto bg-gradient-to-r from-gray-300 to-gray-500 dark:from-gray-500 dark:to-gray-300 rounded-full mb-8" />
           
           {/* Team Stats */}
           <motion.div
@@ -104,20 +104,20 @@ const TeamPage = () => {
             animate={{ scale: 1, opacity: 1 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12"
           >
-            <div className="bg-white rounded-xl shadow-lg p-4">
-              <p className="text-gray-600">Players</p>
-              <p className="text-3xl font-bold">{allPlayers.length}</p>
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4">
+              <p className="text-gray-600 dark:text-gray-300">Players</p>
+              <p className="text-3xl font-bold dark:text-gray-200">{allPlayers.length}</p>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-4">
-              <p className="text-gray-600">Spent</p>
-              <div className="text-3xl font-bold flex gap-[1px] items-center justify-center"> 
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4">
+              <p className="text-gray-600 dark:text-gray-200">Spent</p>
+              <div className="text-3xl font-bold flex gap-[1px] items-center justify-center dark:text-gray-200"> 
                 <SiElixir className='text-[#E11ADB] text-[24px] rotate-[25deg]'/>
                 {totalSpent.toLocaleString()}
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-4">
-              <p className="text-gray-600">Remaining</p>
-              <div className="text-3xl font-bold flex gap-[1px] items-center justify-center"> 
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4">
+              <p className="text-gray-600 dark:text-gray-300">Remaining</p>
+              <div className="text-3xl font-bold flex gap-[1px] items-center justify-center dark:text-gray-200"> 
                 <SiElixir className='text-[#E11ADB] text-[24px] rotate-[25deg]'/>
                 {remainingBalance.toLocaleString()}
               </div>
@@ -129,7 +129,7 @@ const TeamPage = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white rounded-xl shadow-lg p-6 mb-8"
+          className="bg-white dark:bg-[#030e21] rounded-xl shadow-lg p-6 mb-8"
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="relative flex-1">
@@ -137,7 +137,8 @@ const TeamPage = () => {
               <input
                 type="text"
                 placeholder="Search players..."
-                className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
+                           dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -157,29 +158,29 @@ const TeamPage = () => {
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white rounded-xl shadow-lg overflow-hidden"
+          className="bg-white dark:bg-transparent rounded-xl shadow-lg overflow-hidden"
         >
           {/* Table Header */}
-          <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
+          <div className="bg-gray-50 dark:bg-[#030e21] px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-1 font-semibold text-gray-600">#</div>
-              <div className="col-span-7 font-semibold text-gray-600">Player</div>
-              <div className="col-span-4 text-right font-semibold text-gray-600">Price</div>
+              <div className="col-span-1 font-semibold text-gray-600 dark:text-gray-300">#</div>
+              <div className="col-span-7 font-semibold text-gray-600 dark:text-gray-300">Player</div>
+              <div className="col-span-4 text-right font-semibold text-gray-600 dark:text-gray-300">Price</div>
             </div>
           </div>
 
           {/* Table Body */}
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-gray-200 dark:divide-gray-500">
             {filteredPlayers.map((player, index) => (
               <motion.div
                 key={player.id}
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="px-6 py-4 hover:bg-gray-50 transition-colors"
+                className="px-6 py-4 hover:bg-white dark:bg-gray-800 transition-colors"
               >
                 <div className="grid grid-cols-12 gap-4 items-center">
-                  <div className="col-span-1 text-gray-500 font-medium">
+                  <div className="col-span-1 text-gray-500 font-medium dark:text-gray-300">
                     {index + 1}
                   </div>
                   <div className="col-span-7">
@@ -188,13 +189,13 @@ const TeamPage = () => {
                         {getPositionIcon(player.position)}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold">{player.name}</h3>
-                        <p className="text-gray-600 capitalize">{player.position}</p>
+                        <h3 className="text-lg font-semibold dark:text-gray-300">{player.name}</h3>
+                        <p className="text-gray-600 capitalize dark:text-gray-400">{player.position}</p>
                       </div>
                     </div>
                   </div>
                   <div className="col-span-4 flex justify-end">
-                    <div className="text-2xl font-bold text-gray-800 flex gap-[1px] items-center">
+                    <div className="text-2xl font-bold text-gray-800 dark:text-gray-300 flex gap-[1px] items-center">
                       <SiElixir className='text-[#E11ADB] text-[20px] rotate-[25deg]'/>
                       {player.price.toLocaleString()}
                     </div>

@@ -32,19 +32,20 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:pl-72 pt-20 lg:pt-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-4 lg:pl-72 pt-20 lg:pt-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <h1 className="text-3xl font-bold text-gray-800">Live Auction Dashboard</h1>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">Live Auction Dashboard</h1>
             <div className="flex items-center gap-4">
               <div className="relative flex-1 md:w-64">
                 <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search players..."
-                  className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
+                             dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -60,8 +61,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <h2 className="text-2xl font-bold mb-6 flex items-center">
-            <IoWallet className="mr-2" />
+        <h2 className="text-2xl font-bold mb-6 flex items-center dark:text-gray-200">
+            <IoWallet className="mr-2 dark:text-green-500" />
             Team Wallets
           </h2>
 
@@ -112,8 +113,8 @@ const Dashboard = () => {
           })}
         </div>
 
-        <h2 className="text-2xl font-bold mb-6 flex items-center">
-            <FaUsers className=" mr-2" />
+        <h2 className="text-2xl font-bold mb-6 flex items-center dark:text-gray-200">
+            <FaUsers className=" mr-2 dark:text-green-500" />
             Players
         </h2>
 
@@ -126,11 +127,11 @@ const Dashboard = () => {
     return (
       <div
         key={player.id}
-        className={`${teamInfo ? teamInfo.color : 'bg-white'} 
+        className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-100'} 
           rounded-xl overflow-hidden shadow-lg
           transform hover:scale-105 transition-all duration-300`}
       >
-        <div className={`p-4 ${teamInfo ? '' : 'border-2 border-gray-200'} 
+        <div className={`p-4 ${teamInfo ? '' : 'border-[1px] border-gray-300'} 
           ${!isSold ? 'min-h-[160px] rounded-xl' : ''}`}> 
           <div className="flex justify-between items-start">
             <div>
