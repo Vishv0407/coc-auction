@@ -161,9 +161,9 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-4 lg:pl-64 pt-20 lg:pt-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-0 md:p-4 lg:pl-64 pt-20 lg:pt-8">
       <Navbar />
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto p-4 py-8">
         {/* Team Wallets Section */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
@@ -180,8 +180,8 @@ const Admin = () => {
                   className={`${data.color} ${data.border} border-2 rounded-lg p-4
                              shadow-md transform hover:scale-105 transition-all duration-300`}
                 >
-                  <div className="flex items-center space-x-3 mb-2">
-                    <img src={data.icon} alt={teamName} className="w-10 h-10" />
+                  <div className="flex items-center space-x-2 mb-2">
+                    <img src={data.icon} alt={teamName} className="w-9 h-9" />
                     <div>
                       <h3 className="text-white font-bold">{teamName}</h3>
                     </div>
@@ -293,7 +293,7 @@ const Admin = () => {
         {/* Sell Modal - Now Larger */}
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-4 md:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               <div className="flex justify-between items-start mb-6">
                 <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
                   {selectedPlayer.sold ? "Update Player" : "Sell Player"}
@@ -353,13 +353,13 @@ const Admin = () => {
             hover:opacity-90 transition-all duration-300`}
                           onClick={() => setSelectedTeam(teamName)}
                         >
-                          <div className="flex items-center justify-center space-x-3">
+                          <div className="flex items-center justify-center space-x-2">
                             <img
                               src={data.icon}
                               alt={teamName}
-                              className="w-10 h-10"
+                              className="w-10 h-10 md:w-7 md:h-7"
                             />
-                            <div>
+                            <div className="flex flex-col items-start">
                               <div className="text-lg font-bold">
                                 {teamName}
                               </div>

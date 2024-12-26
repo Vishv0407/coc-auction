@@ -140,7 +140,7 @@ const Navbar = () => {
       {/* Mobile Navbar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white dark:bg-[#010815] shadow-lg z-50">
         <div className="flex items-center justify-between px-4 h-full">
-          <Link to="/" className="text-xl font-bold text-gray-800">
+          <Link to="/" className="text-xl font-bold text-gray-800 dark:text-gray-300">
             Clash of Codes
           </Link>
           <div className="flex items-center space-x-2">
@@ -184,7 +184,7 @@ const Navbar = () => {
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-8">
-                  <h1 className="text-2xl font-bold text-gray-800">Menu</h1>
+                  <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-300">Menu</h1>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
