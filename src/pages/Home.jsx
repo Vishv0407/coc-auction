@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { teamData } from '../constants/teamData';
 import { FaTrophy, FaUsers, FaCoins } from 'react-icons/fa';
 import { SiElixir } from "react-icons/si";
+import  pclublogo  from "../assets/pclublogo.png"
 
 const Home = () => {
   const { players: soldPlayers } = useWebSocket();
@@ -18,13 +19,18 @@ const Home = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-4 lg:pl-[17rem] pt-20 lg:pt-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Clash of Codes Auction
-          </h1>
-          <p className="text-xl opacity-90">
-            Live auction dashboard for the ultimate coding tournament
-          </p>
+        <div className=" flex justify-between bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Clash of Codes 3.0 Auction
+            </h1>
+            <p className="text-xl opacity-90">
+              Ultimate coding tournament by Programming club of Ahmedabad University
+            </p>
+          </div>
+          <div>
+            <img src={pclublogo} alt="pclub logo" className='w-[8rem] lg:w-[5.5rem]' />
+          </div>
         </div>
 
         {/* Top Bids Section */}
