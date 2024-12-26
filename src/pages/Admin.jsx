@@ -161,7 +161,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-0 md:p-4 lg:pl-64 pt-20 lg:pt-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-0 md:p-4 lg:pl-64 pt-14 lg:pt-8">
       <Navbar />
       <div className="max-w-7xl mx-auto p-4 py-8">
         {/* Team Wallets Section */}
@@ -194,10 +194,10 @@ const Admin = () => {
                         {spentAmount.toLocaleString()}
                       </span>
                     </div>
-                    <div className="font-bold flex">
+                    <div className=" flex">
                       Balance:{" "}
-                      <span className="pl-1 flex gap-[1px] items-center">
-                        <SiElixir className="text-white text-[14px] rotate-[25deg]" />
+                      <span className="pl-1 font-bold flex gap-[1px] items-center">
+                        <SiElixir className="text-white text-[12px] rotate-[25deg]" />
                         {remainingBalance.toLocaleString()}{" "}
                       </span>
                     </div>
