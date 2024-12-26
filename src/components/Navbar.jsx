@@ -138,7 +138,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navbar */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white dark:bg-[#010815] dark:border-b-[1px] dark:border-b-gray-700 shadow-lg z-50">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white dark:bg-[#010815] dark:border-b-[1px] dark:border-b-gray-800 shadow-lg z-50">
         <div className="flex items-center justify-between px-4 h-full">
           <Link to="/" className="text-xl font-bold text-gray-800 dark:text-gray-300">
             Clash of Codes

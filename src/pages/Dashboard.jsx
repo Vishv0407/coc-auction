@@ -38,26 +38,7 @@ const Dashboard = () => {
         <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">Live Auction Dashboard</h1>
-            <div className="flex items-center gap-4">
-              <div className="relative flex-1 md:w-64">
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search players..."
-                  className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
-                             dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-              <button
-                onClick={() => setSortBy(sortBy === 'price' ? 'name' : 'price')}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
-              >
-                <FaSort />
-                Sort by {sortBy === 'price' ? 'Name' : 'Price'}
-              </button>
-            </div>
+            
           </div>
         </div>
 
@@ -113,10 +94,33 @@ const Dashboard = () => {
           })}
         </div>
 
-        <h2 className="text-2xl font-bold mb-6 flex items-center dark:text-gray-200">
+        <div className="flex sm:flex-row flex-col sm:justify-between items-start md:items-center pb-8">
+        <h2 className=" text-2xl mb-4 md:mb-0 font-bold flex items-center dark:text-gray-200">
             <FaUsers className=" mr-2 dark:text-green-500" />
             Players
         </h2>
+
+        <div className="flex items-center gap-4">
+              <div className="relative flex-1 md:w-64">
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search players..."
+                  className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
+                             dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <button
+                onClick={() => setSortBy(sortBy === 'price' ? 'name' : 'price')}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+              >
+                <FaSort />
+                Sort by {sortBy === 'price' ? 'Name' : 'Price'}
+              </button>
+            </div>
+        </div>
 
         {/* Players Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
