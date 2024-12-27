@@ -94,6 +94,8 @@ const Admin = () => {
     }
 
     try {
+      const currentTime = Date.now(); // Get current timestamp
+
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/players/sell`,
         {
@@ -107,6 +109,7 @@ const Admin = () => {
             position: selectedPlayer.position,
             team: selectedTeam,
             price: parseInt(price),
+            modifiedTime: currentTime // Add timestamp to payload
           }),
         }
       );
@@ -117,6 +120,7 @@ const Admin = () => {
           sold: true,
           team: selectedTeam,
           price: parseInt(price),
+          modifiedTime: currentTime // Add timestamp to local state
         };
 
         // Update local state immediately

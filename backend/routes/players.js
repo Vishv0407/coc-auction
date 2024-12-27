@@ -26,12 +26,12 @@ router.get('/unsold', async (req, res) => {
 // POST route for selling a player
 router.post('/sell', async (req, res) => {
     try {
-      const { playerId, team, price, name, position } = req.body;
+      const { playerId, team, price, name, position, modifiedTime } = req.body;
   
-      console.log('Received request:', { playerId, team, price, name, position }); // Debug log
+      console.log('Received request:', { playerId, team, price, name, position, modifiedTime }); // Debug log
   
       // Validate input
-      if (!playerId || !team || !price || !name || !position) {
+      if (!playerId || !team || !price || !name || !position || !modifiedTime) {
         return res.status(400).json({
           message: 'Missing required fields: playerId, team, price, name, and position are required'
         });
@@ -48,7 +48,8 @@ router.post('/sell', async (req, res) => {
           position: position,
           sold: true,
           team: team,
-          price: price
+          price: price,
+          modifiedTime: modifiedTime
         });
         await player.save();
       } else {

@@ -27,6 +27,10 @@ const playerSchema = new mongoose.Schema({
   price: {
     type: Number,
     default: 0
+  },
+  modifiedTime: {
+    type: Number,
+    default: null
   }
 });
 
