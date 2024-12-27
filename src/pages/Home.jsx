@@ -29,7 +29,7 @@ const Home = () => {
             </p>
           </div>
           <div>
-            <img src={pclublogo} alt="pclub logo" className='w-[8rem] lg:w-[5.5rem]' />
+            <img src={pclublogo} alt="pclub logo" className='w-[8rem] mt-3 sm:mt-0 lg:w-[5.5rem]' />
           </div>
         </div>
 
