@@ -22,6 +22,7 @@ const TeamPage = () => {
   useEffect(() => {
     const teamPlayers = playersData.players
       .map(player => {
+        console.log(player);
         const soldPlayer = soldPlayers.find(sp => sp.id === player.id);
         return soldPlayer || player;
       })
@@ -190,7 +191,7 @@ const TeamPage = () => {
                       </div>
                       <div>
                         <a 
-                          href={player['codolio link']}
+                          href={player.codolio_link}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-lg font-semibold dark:text-gray-300 hover:underline"

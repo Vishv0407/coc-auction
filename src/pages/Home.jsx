@@ -60,7 +60,7 @@ const Home = () => {
                     <img src={team.icon} alt={team.name} className="w-16 h-16" />
                     <div>
                       <a 
-                        href={player['codolio link']}
+                        href={player.codolio_link}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white text-xl font-bold mb-1 hover:underline"

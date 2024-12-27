@@ -21,15 +21,31 @@ const Dashboard = () => {
     setAllPlayers(updatedPlayers);
   }, [soldPlayers]);
 
-  // Sort players
+  // Updated sort function
   const sortedPlayers = [...allPlayers].sort((a, b) => {
-    if (sortBy === 'price') return b.price - a.price;
-    return a.name.localeCompare(b.name);
+    switch (sortBy) {
+      case 'price':
+        return b.price - a.price;
+      case 'team':
+        // Sort by team name, handling null teams
+        if (!a.team && !b.team) return 0;
+        if (!a.team) return 1;
+        if (!b.team) return -1;
+        return a.team.localeCompare(b.team);
+      default:
+        return a.name.localeCompare(b.name);
+    }
   });
 
   const filteredPlayers = sortedPlayers.filter(player =>
     player.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Get recent bids (last 2 sold players)
+  const recentBids = soldPlayers
+    .filter(player => player.sold)
+    .sort((a, b) => b.timestamp - a.timestamp) // Assuming there's a timestamp field
+    .slice(0, 2);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-4 lg:pl-72 pt-20 lg:pt-8">
@@ -101,79 +117,73 @@ const Dashboard = () => {
             Recent Bids
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {soldPlayers
-              .filter(player => player.sold && player.modifiedTime)
-              .sort((a, b) => b.modifiedTime - a.modifiedTime)
-              .slice(0, 2)
-              .map(player => {
-                const teamInfo = player.team ? teamData[player.team] : null;
-                return (
-                  <div
-                    key={player.id}
-                    className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-900'} 
-                      rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300`}
-                  >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <a 
-                          href={player['codolio link']}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xl font-bold hover:underline text-white"
-                        >
-                          {player.name}
-                        </a>
-                        <p className="text-white opacity-90 capitalize">{player.position}</p>
-                        <div className="mt-2">
-                          <p className="text-sm text-white opacity-90">Sold to {player.team}</p>
-                          <div className="text-2xl font-bold text-white flex gap-[1px] items-center">
-                            <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
-                            {player.price.toLocaleString()}
-                          </div>
-                          {player.modifiedTime && (
-                            <p className="text-sm text-white opacity-75 mt-1">
-                              {new Date(player.modifiedTime).toLocaleTimeString()}
-                            </p>
-                          )}
+            {recentBids.map(player => {
+              const teamInfo = player.team ? teamData[player.team] : null;
+              return (
+                <div
+                  key={player.id}
+                  className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-900'} 
+                    rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <a 
+                        href={player.codolio_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xl font-bold hover:underline text-white"
+                      >
+                        {player.name}
+                      </a>
+                      <p className="text-white opacity-90 capitalize">{player.position}</p>
+                      <div className="mt-2">
+                        <p className="text-sm text-white opacity-90">Sold to {player.team}</p>
+                        <div className="text-2xl font-bold text-white flex gap-[1px] items-center">
+                          <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
+                          {player.price.toLocaleString()}
                         </div>
                       </div>
-                      {teamInfo && (
-                        <img src={teamInfo.icon} alt={player.team} className="w-12 h-12" />
-                      )}
                     </div>
+                    {teamInfo && (
+                      <img src={teamInfo.icon} alt={player.team} className="w-12 h-12" />
+                    )}
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Players Search and sort */}
+        {/* Updated Players Search and Sort */}
         <div className="flex sm:flex-row flex-col sm:justify-between items-start md:items-center pb-8">
-        <h2 className=" text-2xl mb-4 md:mb-0 font-bold flex items-center dark:text-gray-200">
-            <FaUsers className=" mr-2 dark:text-green-500" />
+          <h2 className="text-2xl mb-4 md:mb-0 font-bold flex items-center dark:text-gray-200">
+            <FaUsers className="mr-2 dark:text-green-500" />
             Players
-        </h2>
+          </h2>
 
-        <div className="flex items-center gap-4">
-              <div className="relative flex-1 md:w-64">
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search players..."
-                  className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
-                             dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-              <button
-                onClick={() => setSortBy(sortBy === 'price' ? 'name' : 'price')}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
-              >
-                <FaSort />
-                Sort by {sortBy === 'price' ? 'Name' : 'Price'}
-              </button>
+          <div className="flex items-center gap-4">
+            <div className="relative flex-1 md:w-64">
+              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search players..."
+                className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
+                         dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
+            <select
+              onChange={(e) => setSortBy(e.target.value)}
+              value={sortBy}
+              className="px-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
+                       dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="price">Sort by Price</option>
+              <option value="name">Sort by Name</option>
+              <option value="team">Sort by Team</option>
+            </select>
+          </div>
         </div>
 
         {/* Players Grid */}
@@ -194,7 +204,7 @@ const Dashboard = () => {
           <div className="flex justify-between items-start">
             <div>
               <a 
-                href={player['codolio link']}
+                href={player.codolio_link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`text-xl font-bold hover:underline ${teamInfo ? 'text-white' : 'text-gray-800'}`}

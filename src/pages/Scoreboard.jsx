@@ -84,7 +84,7 @@ const Scoreboard = () => {
                       <div className="flex items-center gap-4">
                         <div>
                           <a
-                            href={player['codolio link']}
+                            href={player.codolio_link}
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`text-lg md:text-xl font-bold hover:underline ${

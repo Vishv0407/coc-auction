@@ -7,7 +7,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user1",
+      "codolio_link": "https://codolio.com/user1",
       "q1_score": 87,
       "q2_score": 93
     },
@@ -18,7 +18,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user2",
+      "codolio_link": "https://codolio.com/user2",
       "q1_score": 78,
       "q2_score": 88
     },
@@ -29,7 +29,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user3",
+      "codolio_link": "https://codolio.com/user3",
       "q1_score": 95,
       "q2_score": 70
     },
@@ -40,7 +40,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user4",
+      "codolio_link": "https://codolio.com/user4",
       "q1_score": 82,
       "q2_score": 91
     },
@@ -51,7 +51,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user5",
+      "codolio_link": "https://codolio.com/user5",
       "q1_score": 75,
       "q2_score": 88
     },
@@ -62,7 +62,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user6",
+      "codolio_link": "https://codolio.com/user6",
       "q1_score": 89,
       "q2_score": 76
     },
@@ -73,7 +73,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user7",
+      "codolio_link": "https://codolio.com/user7",
       "q1_score": 83,
       "q2_score": 94
     },
@@ -84,7 +84,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user8",
+      "codolio_link": "https://codolio.com/user8",
       "q1_score": 68,
       "q2_score": 73
     },
@@ -95,7 +95,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user9",
+      "codolio_link": "https://codolio.com/user9",
       "q1_score": 92,
       "q2_score": 81
     },
@@ -106,7 +106,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user10",
+      "codolio_link": "https://codolio.com/user10",
       "q1_score": 79,
       "q2_score": 85
     },
@@ -117,7 +117,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user11",
+      "codolio_link": "https://codolio.com/user11",
       "q1_score": 84,
       "q2_score": 92
     },
@@ -128,7 +128,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user12",
+      "codolio_link": "https://codolio.com/user12",
       "q1_score": 90,
       "q2_score": 77
     },
@@ -139,7 +139,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user13",
+      "codolio_link": "https://codolio.com/user13",
       "q1_score": 88,
       "q2_score": 69
     },
@@ -150,7 +150,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user14",
+      "codolio_link": "https://codolio.com/user14",
       "q1_score": 76,
       "q2_score": 85
     },
@@ -161,7 +161,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user15",
+      "codolio_link": "https://codolio.com/user15",
       "q1_score": 81,
       "q2_score": 86
     },
@@ -172,7 +172,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user16",
+      "codolio_link": "https://codolio.com/user16",
       "q1_score": 72,
       "q2_score": 89
     },
@@ -183,7 +183,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/username",
+      "codolio_link": "https://codolio.com/username",
       "q1_score": 121,
       "q2_score": 65
     },
@@ -194,7 +194,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user18",
+      "codolio_link": "https://codolio.com/user18",
       "q1_score": 69,
       "q2_score": 82
     },
@@ -205,7 +205,7 @@
       "sold": false,
       "team": null,
       "price": 0,
-      "codolio link": "https://codolio.com/user19",
+      "codolio_link": "https://codolio.com/user19",
       "q1_score": 74,
       "q2_score": 88
     }
