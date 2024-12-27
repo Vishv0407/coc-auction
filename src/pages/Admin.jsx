@@ -198,7 +198,7 @@ const Admin = () => {
                         {spentAmount.toLocaleString()}
                       </span>
                     </div>
-                    <div className=" flex">
+                    <div className=" flex text-sm">
                       Balance:{" "}
                       <span className="pl-1 font-bold flex gap-[1px] items-center">
                         <SiElixir className="text-white text-[12px] rotate-[25deg]" />

@@ -25,7 +25,7 @@ const Home = () => {
               Clash of Codes 3.0 Auction
             </h1>
             <p className="text-[1.15rem] opacity-90">
-              Ultimate coding tournament by Programming club of Ahmedabad University
+              Ultimate coding tournament by Programming club of Ahmedabad University ✨
             </p>
           </div>
           <div>
@@ -40,46 +40,54 @@ const Home = () => {
             Highest Bids
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {topBids.map((player, index) => {
-              const team = teamData[player.team];
-              return (
-                <div
-                  key={player.id}
-                  className={`${team.color} rounded-xl p-6 shadow-lg
-                    transform hover:scale-105 transition-all duration-300
-                    relative overflow-hidden`}
-                >
-                  {/* Position Badge */}
-                  <div className="absolute -right-8 -top-8 bg-white/20 w-24 h-24 rounded-full">
-                    <span className="absolute bottom-5 left-3 text-4xl font-bold text-white">
-                      #{index + 1}
-                    </span>
-                  </div>
+            {topBids.length > 0 ? (
+              topBids.map((player, index) => {
+                const team = teamData[player.team];
+                return (
+                  <div
+                    key={player.id}
+                    className={`${team.color} rounded-xl p-6 shadow-lg
+                      transform hover:scale-105 transition-all duration-300
+                      relative overflow-hidden`}
+                  >
+                    {/* Position Badge */}
+                    <div className="absolute -right-8 -top-8 bg-white/20 w-24 h-24 rounded-full">
+                      <span className="absolute bottom-5 left-3 text-4xl font-bold text-white">
+                        #{index + 1}
+                      </span>
+                    </div>
 
-                  <div className="flex items-start space-x-4">
-                    <img src={team.icon} alt={team.name} className="w-16 h-16" />
-                    <div>
-                      <a 
-                        href={player.codolio_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white text-xl font-bold mb-1 hover:underline"
-                      >
-                        {player.name}
-                      </a>
-                      <p className="text-white/90">{player.position}</p>
-                      <div className="mt-3">
-                        <p className="text-sm text-white/90">Sold to {player.team}</p>
-                        <div className="text-2xl font-bold text-white flex gap-[1px] items-center">
-                          <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
-                          {player.price.toLocaleString()}
+                    <div className="flex items-start space-x-4">
+                      <img src={team.icon} alt={team.name} className="w-16 h-16" />
+                      <div>
+                        <a 
+                          href={player.codolio_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white text-xl font-bold mb-1 hover:underline"
+                        >
+                          {player.name}
+                        </a>
+                        <p className="text-white/90">{player.position}</p>
+                        <div className="mt-3">
+                          <p className="text-sm text-white/90">Sold to {player.team}</p>
+                          <div className="text-2xl font-bold text-white flex gap-[1px] items-center">
+                            <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
+                            {player.price.toLocaleString()}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <div className="col-span-3 bg-white dark:bg-gray-900 rounded-xl p-8 text-center shadow-lg">
+                <p className="text-xl font-semibold text-gray-800 dark:text-gray-300">
+                  Auction not started yet, stay tuned!
+                </p>
+              </div>
+            )}
           </div>
         </div>
 

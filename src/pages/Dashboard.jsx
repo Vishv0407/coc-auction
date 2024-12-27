@@ -53,7 +53,7 @@ const Dashboard = () => {
         {/* Header Section */}
         <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">Live Auction Dashboard</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200">Live Auction Dashboard</h1>
             
           </div>
         </div>
@@ -117,40 +117,48 @@ const Dashboard = () => {
             Recent Bids
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {recentBids.map(player => {
-              const teamInfo = player.team ? teamData[player.team] : null;
-              return (
-                <div
-                  key={player.id}
-                  className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-900'} 
-                    rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300`}
-                >
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <a 
-                        href={player.codolio_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xl font-bold hover:underline text-white"
-                      >
-                        {player.name}
-                      </a>
-                      <p className="text-white opacity-90 capitalize">{player.position}</p>
-                      <div className="mt-2">
-                        <p className="text-sm text-white opacity-90">Sold to {player.team}</p>
-                        <div className="text-2xl font-bold text-white flex gap-[1px] items-center">
-                          <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
-                          {player.price.toLocaleString()}
+            {recentBids.length > 0 ? (
+              recentBids.map(player => {
+                const teamInfo = player.team ? teamData[player.team] : null;
+                return (
+                  <div
+                    key={player.id}
+                    className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-900'} 
+                      rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300`}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <a 
+                          href={player.codolio_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xl font-bold hover:underline text-white"
+                        >
+                          {player.name}
+                        </a>
+                        <p className="text-white opacity-90 capitalize">{player.position}</p>
+                        <div className="mt-2">
+                          <p className="text-sm text-white opacity-90">Sold to {player.team}</p>
+                          <div className="text-2xl font-bold text-white flex gap-[1px] items-center">
+                            <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
+                            {player.price.toLocaleString()}
+                          </div>
                         </div>
                       </div>
+                      {teamInfo && (
+                        <img src={teamInfo.icon} alt={player.team} className="w-12 h-12" />
+                      )}
                     </div>
-                    {teamInfo && (
-                      <img src={teamInfo.icon} alt={player.team} className="w-12 h-12" />
-                    )}
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <div className="col-span-2 bg-white dark:bg-gray-900 rounded-xl p-8 text-center shadow-lg">
+                <p className="text-xl font-semibold text-gray-800 dark:text-gray-300">
+                  Auction not started yet, stay tuned!
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
