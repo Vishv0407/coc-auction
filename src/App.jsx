@@ -8,6 +8,7 @@ import Admin from "./pages/Admin";
 import TeamPage from "./pages/TeamPage";
 import { Toaster } from 'react-hot-toast';
 import Footer from './components/Footer';
+import Scoreboard from "./pages/Scoreboard";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/scoreboard" element={<Scoreboard />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/teams/:teamName" element={<TeamPage />} />
             </Routes>

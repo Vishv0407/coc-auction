@@ -1,157 +1,213 @@
 {
-    "players": [
-      {
-        "id": "1",
-        "name": "John Doe",
-        "position": "co-leader",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "2",
-        "name": "Jane Smith",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "3",
-        "name": "Harshad Patel",
-        "position": "member",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "4",
-        "name": "Mehul Shah",
-        "position": "member",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "5",
-        "name": "Nirav Modi",
-        "position": "co-leader",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "6",
-        "name": "Jignesh Thakkar",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "7",
-        "name": "Dinesh Parmar",
-        "position": "member",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "8",
-        "name": "Hiren Joshi",
-        "position": "member",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "9",
-        "name": "Chirag Desai",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "10",
-        "name": "Bhavesh Trivedi",
-        "position": "co-leader",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "11",
-        "name": "Kamlesh Bhatt",
-        "position": "member",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "12",
-        "name": "Rajesh Patel",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "13",
-        "name": "Suresh Mehta",
-        "position": "member",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "14",
-        "name": "Kishor Shukla",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "15",
-        "name": "asa Shukla",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "16",
-        "name": "sasa Shukla",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "17",
-        "name": "asttr Shukla",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "18",
-        "name": "gtrg Shukla",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      },
-      {
-        "id": "19",
-        "name": "fseg Shukla",
-        "position": "elder",
-        "sold": false,
-        "team": null,
-        "price": 0
-      }
-    ]
-  }
-  
+  "players": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "position": "co-leader",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user1",
+      "q1_score": 87,
+      "q2_score": 93
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user2",
+      "q1_score": 78,
+      "q2_score": 88
+    },
+    {
+      "id": "3",
+      "name": "Harshad Patel",
+      "position": "member",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user3",
+      "q1_score": 95,
+      "q2_score": 70
+    },
+    {
+      "id": "4",
+      "name": "Mehul Shah",
+      "position": "member",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user4",
+      "q1_score": 82,
+      "q2_score": 91
+    },
+    {
+      "id": "5",
+      "name": "Nirav Modi",
+      "position": "co-leader",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user5",
+      "q1_score": 75,
+      "q2_score": 88
+    },
+    {
+      "id": "6",
+      "name": "Jignesh Thakkar",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user6",
+      "q1_score": 89,
+      "q2_score": 76
+    },
+    {
+      "id": "7",
+      "name": "Dinesh Parmar",
+      "position": "member",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user7",
+      "q1_score": 83,
+      "q2_score": 94
+    },
+    {
+      "id": "8",
+      "name": "Hiren Joshi",
+      "position": "member",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user8",
+      "q1_score": 68,
+      "q2_score": 73
+    },
+    {
+      "id": "9",
+      "name": "Chirag Desai",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user9",
+      "q1_score": 92,
+      "q2_score": 81
+    },
+    {
+      "id": "10",
+      "name": "Bhavesh Trivedi",
+      "position": "co-leader",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user10",
+      "q1_score": 79,
+      "q2_score": 85
+    },
+    {
+      "id": "11",
+      "name": "Kamlesh Bhatt",
+      "position": "member",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user11",
+      "q1_score": 84,
+      "q2_score": 92
+    },
+    {
+      "id": "12",
+      "name": "Rajesh Patel",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user12",
+      "q1_score": 90,
+      "q2_score": 77
+    },
+    {
+      "id": "13",
+      "name": "Suresh Mehta",
+      "position": "member",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user13",
+      "q1_score": 88,
+      "q2_score": 69
+    },
+    {
+      "id": "14",
+      "name": "Kishor Shukla",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user14",
+      "q1_score": 76,
+      "q2_score": 85
+    },
+    {
+      "id": "15",
+      "name": "asa Shukla",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user15",
+      "q1_score": 81,
+      "q2_score": 86
+    },
+    {
+      "id": "16",
+      "name": "sasa Shukla",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user16",
+      "q1_score": 72,
+      "q2_score": 89
+    },
+    {
+      "id": "17",
+      "name": "asttr Shukla",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/username",
+      "q1_score": 121,
+      "q2_score": 65
+    },
+    {
+      "id": "18",
+      "name": "gtrg Shukla",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user18",
+      "q1_score": 69,
+      "q2_score": 82
+    },
+    {
+      "id": "19",
+      "name": "fseg Shukla",
+      "position": "elder",
+      "sold": false,
+      "team": null,
+      "price": 0,
+      "codolio link": "https://codolio.com/user19",
+      "q1_score": 74,
+      "q2_score": 88
+    }
+  ]
+}

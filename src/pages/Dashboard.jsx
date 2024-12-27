@@ -94,6 +94,7 @@ const Dashboard = () => {
           })}
         </div>
 
+        {/* Players Search and sort */}
         <div className="flex sm:flex-row flex-col sm:justify-between items-start md:items-center pb-8">
         <h2 className=" text-2xl mb-4 md:mb-0 font-bold flex items-center dark:text-gray-200">
             <FaUsers className=" mr-2 dark:text-green-500" />
@@ -139,9 +140,14 @@ const Dashboard = () => {
           ${!isSold ? 'min-h-[160px] rounded-xl' : ''}`}> 
           <div className="flex justify-between items-start">
             <div>
-              <h3 className={`text-xl font-bold ${teamInfo ? 'text-white' : 'text-gray-800'}`}>
+              <a 
+                href={player['codolio link']}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-xl font-bold hover:underline ${teamInfo ? 'text-white' : 'text-gray-800'}`}
+              >
                 {player.name}
-              </h3>
+              </a>
               <p className={`capitalize ${teamInfo ? 'text-white opacity-90' : 'text-gray-600'}`}>
                 {player.position}
               </p>

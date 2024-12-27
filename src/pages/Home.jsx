@@ -59,13 +59,20 @@ const Home = () => {
                   <div className="flex items-start space-x-4">
                     <img src={team.icon} alt={team.name} className="w-16 h-16" />
                     <div>
-                      <h3 className="text-white text-xl font-bold mb-1">{player.name}</h3>
+                      <a 
+                        href={player['codolio link']}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white text-xl font-bold mb-1 hover:underline"
+                      >
+                        {player.name}
+                      </a>
                       <p className="text-white/90">{player.position}</p>
                       <div className="mt-3">
                         <p className="text-sm text-white/90">Sold to {player.team}</p>
                         <div className="text-2xl font-bold text-white flex gap-[1px] items-center">
-                        <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
-                        {player.price.toLocaleString()}
+                          <SiElixir className='text-white text-[20px] rotate-[25deg]'/>
+                          {player.price.toLocaleString()}
                         </div>
                       </div>
                     </div>

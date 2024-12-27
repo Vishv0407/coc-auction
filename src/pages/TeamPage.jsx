@@ -189,7 +189,14 @@ const TeamPage = () => {
                         {getPositionIcon(player.position)}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold dark:text-gray-300">{player.name}</h3>
+                        <a 
+                          href={player['codolio link']}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-lg font-semibold dark:text-gray-300 hover:underline"
+                        >
+                          {player.name}
+                        </a>
                         <p className="text-gray-600 capitalize dark:text-gray-400">{player.position}</p>
                       </div>
                     </div>

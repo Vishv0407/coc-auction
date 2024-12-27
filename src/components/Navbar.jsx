@@ -81,6 +81,19 @@ const Navbar = () => {
         <span>Live Dashboard</span>
       </Link>
 
+      {/* Scoreboard Link */}
+      <Link
+        to="/scoreboard"
+        onClick={() => setIsMobileMenuOpen(false)}
+        className={`flex items-center space-x-3 px-4 py-3 rounded-lg
+          transition-colors ${isActive('/scoreboard') 
+            ? 'bg-blue-500 text-white' 
+            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+      >
+        <FaChartLine />
+        <span>Scoreboard</span>
+      </Link>
+
       {/* Teams Section */}
       <div>
         <button
