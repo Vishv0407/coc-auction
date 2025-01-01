@@ -44,7 +44,7 @@ const Dashboard = () => {
   // Get recent bids (last 2 sold players)
   const recentBids = soldPlayers
     .filter(player => player.sold)
-    .sort((a, b) => b.timestamp - a.timestamp) // Assuming there's a timestamp field
+    .sort((a, b) => b.modifiedTime - a.modifiedTime)
     .slice(0, 2);
 
   return (
@@ -124,7 +124,7 @@ const Dashboard = () => {
                   <div
                     key={player.id}
                     className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-900'} 
-                      rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300`}
+                      rounded-xl p-4 shadow-lg transform hover:scale-102 transition-all duration-150`}
                   >
                     <div className="flex justify-between items-start">
                       <div>
