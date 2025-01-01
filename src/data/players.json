@@ -2,7 +2,7 @@
   "players": [
     {
       "id": "1",
-      "name": "John Doe",
+      "name": "Simran Patel",
       "position": "co-leader",
       "sold": false,
       "team": null,
@@ -13,7 +13,7 @@
     },
     {
       "id": "2",
-      "name": "Jane Smith",
+      "name": "Pooja Mehta",
       "position": "elder",
       "sold": false,
       "team": null,
@@ -156,7 +156,7 @@
     },
     {
       "id": "15",
-      "name": "asa Shukla",
+      "name": "Ajay Shukla",
       "position": "elder",
       "sold": false,
       "team": null,
@@ -167,7 +167,7 @@
     },
     {
       "id": "16",
-      "name": "sasa Shukla",
+      "name": "Sahil Shah",
       "position": "elder",
       "sold": false,
       "team": null,
@@ -178,7 +178,7 @@
     },
     {
       "id": "17",
-      "name": "asttr Shukla",
+      "name": "Ishan Kishan",
       "position": "elder",
       "sold": false,
       "team": null,
@@ -189,7 +189,7 @@
     },
     {
       "id": "18",
-      "name": "gtrg Shukla",
+      "name": "Sanjay Bhatt",
       "position": "elder",
       "sold": false,
       "team": null,
@@ -200,7 +200,7 @@
     },
     {
       "id": "19",
-      "name": "fseg Shukla",
+      "name": "Fiya Bhatt",
       "position": "elder",
       "sold": false,
       "team": null,
