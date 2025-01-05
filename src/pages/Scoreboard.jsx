@@ -37,9 +37,9 @@ const Scoreboard = () => {
         {/* Header Section */}
         <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
-              <FaTrophy className="inline-block mr-2 text-yellow-500" />
-              Scoreboard
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+              <FaTrophy className="inline-block mr-4 text-yellow-500" />
+              Qualifiers Scoreboard
             </h1>
           </div>
         </div>

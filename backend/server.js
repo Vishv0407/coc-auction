@@ -27,10 +27,12 @@ app.use(express.json());
 // Import routes
 const playerRoutes = require('./routes/players');
 const teamRoutes = require('./routes/teams');
+const transactionLogsRouter = require('./routes/transactionLogs');
 
 // Use routes
 app.use('/api/players', playerRoutes);
 app.use('/api/teams', teamRoutes);
+app.use('/api/logs', transactionLogsRouter);
 
 // WebSocket connection
 io.on('connection', (socket) => {

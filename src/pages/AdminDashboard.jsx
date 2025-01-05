@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useWebSocket } from "../context/WebSocketContext";
 import playersData from "../data/players.json";
 import { teamData } from "../constants/teamData";
-import Navbar from "../components/Navbar";
 import { FaTimes, FaSearch } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { SiElixir } from "react-icons/si";
 
-const Admin = () => {
+const AdminDashboard = () => {
   const { socket, players: soldPlayers } = useWebSocket();
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [price, setPrice] = useState("");
@@ -15,9 +14,6 @@ const Admin = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [players, setPlayers] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   // Initialize and update players when soldPlayers changes
   useEffect(() => {
@@ -31,7 +27,6 @@ const Admin = () => {
   // Listen for real-time updates
   useEffect(() => {
     if (socket) {
-      // Listen for player updates
       socket.on("playerUpdated", (updatedPlayer) => {
         setPlayers((prevPlayers) =>
           prevPlayers.map((player) =>
@@ -40,7 +35,6 @@ const Admin = () => {
         );
       });
 
-      // Listen for new player additions
       socket.on("playerAdded", (newPlayer) => {
         setPlayers((prevPlayers) => [...prevPlayers, newPlayer]);
       });
@@ -52,7 +46,7 @@ const Admin = () => {
     }
   }, [socket]);
 
-  // Sort players by team and name
+  // Rest of your existing functions
   const sortedPlayers = [...players].sort((a, b) => {
     if (a.team && !b.team) return -1;
     if (!a.team && b.team) return 1;
@@ -78,13 +72,10 @@ const Admin = () => {
     setShowModal(true);
   };
 
-  // Custom toast style for gray background
   const isDarkTheme = document.documentElement.classList.contains('dark');
-
-// Custom toast style for both themes
   const toastStyle = {
-    background: isDarkTheme ? "#FFFFFF" : "#374151", // White for dark mode, gray-700 for light mode
-    color: isDarkTheme ? "#000000" : "#FFFFFF", // Black text for dark mode, white for light mode
+    background: isDarkTheme ? "#FFFFFF" : "#374151",
+    color: isDarkTheme ? "#000000" : "#FFFFFF",
     fontSize: "21px",
   };
 
@@ -108,10 +99,9 @@ const Admin = () => {
 
     try {
       const currentTime = Date.now();
-      
-      // Ensure team name is properly formatted
       const formattedTeam = selectedTeam.charAt(0).toUpperCase() + selectedTeam.slice(1);
 
+      // First, handle the player sale/update
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/players/sell`,
         {
@@ -138,18 +128,44 @@ const Admin = () => {
           sold: true,
           team: selectedTeam,
           price: parseInt(price),
-          modifiedTime: currentTime // Add timestamp to local state
+          modifiedTime: currentTime
         };
 
-        // Update local state immediately
+        // Update local state
         setPlayers((prevPlayers) =>
           prevPlayers.map((player) =>
             player.id === updatedPlayer.id ? updatedPlayer : player
           )
         );
 
-        // Emit socket event for real-time updates
+        // Emit socket event
         socket.emit("playerSold", updatedPlayer);
+
+        // Create transaction log
+        const logResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/logs`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              playerName: selectedPlayer.name,
+              playerId: selectedPlayer.id,
+              codolioLink: selectedPlayer.codolio_link || "",
+              soldTo: formattedTeam,
+              price: parseInt(price),
+              action: selectedPlayer.sold ? "update" : "sell"
+            }),
+          }
+        );
+
+        if (!logResponse.ok) {
+          console.error("Failed to create transaction log");
+          toast.error("Failed to log transaction", {
+            style: toastStyle,
+          });
+        }
 
         closeModal();
         toast.success(
@@ -160,21 +176,15 @@ const Admin = () => {
             style: toastStyle,
           }
         );
-      } else {
-        const error = await response.json();
-        toast.error(error.message || "Error updating player", {
-          style: toastStyle,
-        });
       }
     } catch (error) {
-      console.error("Error updating player:", error);
-      toast.error("Error updating player", {
+      console.error("Error:", error);
+      toast.error("An error occurred", {
         style: toastStyle,
       });
     }
   };
 
-  // Calculate team balances
   const getTeamBalance = (teamName) => {
     const teamPlayers = players.filter((p) => p.team === teamName);
     const spentAmount = teamPlayers.reduce((sum, p) => sum + (p.price || 0), 0);
@@ -182,56 +192,8 @@ const Admin = () => {
     return initialBalance - spentAmount;
   };
 
-  const handlePasswordSubmit = (e) => {
-    e.preventDefault();
-    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
-    
-    if (password === correctPassword) {
-      setIsAuthenticated(true);
-      setError("");
-    } else {
-      setError("Incorrect password. You are not authorized.");
-      setPassword("");
-    }
-  };
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-[#010815] flex items-center justify-center p-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 max-w-md w-full">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">
-            Admin Authentication
-          </h2>
-          <form onSubmit={handlePasswordSubmit} className="space-y-4">
-            <div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter admin password"
-                className="w-full px-4 py-2 border rounded-lg dark:bg-gray-800 dark:text-gray-200 
-                         dark:border-gray-700 focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            {error && (
-              <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>
-            )}
-            <button
-              type="submit"
-              className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 
-                       transition-colors font-bold"
-            >
-              Login
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#010815] p-0 md:p-4 lg:pl-64 pt-14 lg:pt-8">
-      {/* <Navbar /> */}
       <div className="max-w-7xl mx-auto p-4 py-8">
         {/* Team Wallets Section */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
@@ -465,4 +427,5 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+
+export default AdminDashboard;

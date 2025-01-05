@@ -2,17 +2,35 @@ const Team = require('../models/Team');
 
 const initializeTeams = async () => {
   try {
-    const teams = ['Barbarians', 'Giants', 'Pekkas', 'Wizards'];
+    const teams = [
+      { 
+        name: 'Barbarians', 
+        wallet: 25000,
+        color: 'bg-yellow-500'
+      },
+      { 
+        name: 'Giants', 
+        wallet: 25000,
+        color: 'bg-red-500'
+      },
+      { 
+        name: 'Pekkas', 
+        wallet: 25000,
+        color: 'bg-purple-500'
+      },
+      { 
+        name: 'Wizards', 
+        wallet: 25000,
+        color: 'bg-blue-500'
+      }
+    ];
     
-    for (const teamName of teams) {
-      const existingTeam = await Team.findOne({ name: teamName });
+    for (const team of teams) {
+      const existingTeam = await Team.findOne({ name: team.name });
       
       if (!existingTeam) {
-        await Team.create({
-          name: teamName,
-          wallet: 10000
-        });
-        console.log(`Team ${teamName} initialized`);
+        await Team.create(team);
+        console.log(`Team ${team.name} initialized with wallet ${team.wallet}`);
       }
     }
   } catch (error) {
