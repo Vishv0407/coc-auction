@@ -17,10 +17,20 @@ import Scoreboard from "./pages/Scoreboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogs from "./pages/AdminLogs";
 import RequireAuth from "./components/RequireAuth";
+import NotFound from "./pages/NotFound";
 
 function AppContent() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/adminpage");
+  const isNotFoundPage = location.pathname !== "/" && 
+    !location.pathname.startsWith("/dashboard") && 
+    !location.pathname.startsWith("/scoreboard") && 
+    !location.pathname.startsWith("/teams") && 
+    !location.pathname.startsWith("/adminpage");
+
+  if (isNotFoundPage) {
+    return <NotFound />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -53,7 +63,6 @@ function AppContent() {
           />
         </Routes>
       </div>
-
       <Footer />
       <Toaster position="top-right" />
     </div>
