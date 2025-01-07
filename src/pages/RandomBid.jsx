@@ -111,7 +111,7 @@ const RandomBid = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4 relative">
+    <div className="min-h-screen bg-gray-900 pt-8 md:pt-0 p-4 relative">
       <div className="max-w-7xl mx-auto pb-24">
         <Link
           to="/adminpage/dashboard"
@@ -281,10 +281,10 @@ const RandomBid = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.5, opacity: 0 }}
                 className="fixed z-[101] bg-gray-800 rounded-xl p-8 shadow-2xl
-                  border border-gray-700 w-[90%] max-w-md"
+                  border border-gray-700 w-[90%] max-w-md left-[5%] md:left-[40%]"
                 style={{
                   top: "30%",
-                  left: "40%",
+                  // left: "40%",
                   transform: "translate(-50%, -50%)",
                 }}
               >
