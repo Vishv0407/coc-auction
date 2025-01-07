@@ -18,10 +18,10 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogs from "./pages/AdminLogs";
 import RequireAuth from "./components/RequireAuth";
 import NotFound from "./pages/NotFound";
+import RandomBid from "./pages/RandomBid";
 
 function AppContent() {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/adminpage");
   const isNotFoundPage = location.pathname !== "/" && 
     !location.pathname.startsWith("/dashboard") && 
     !location.pathname.startsWith("/scoreboard") && 
@@ -34,7 +34,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {isAdminRoute ? <AdminNavbar /> : <Navbar />}
+      {!location.pathname.startsWith("/adminpage") && <Navbar />}
       <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -49,7 +49,10 @@ function AppContent() {
             path="/adminpage/dashboard"
             element={
               <RequireAuth>
-                <AdminDashboard />
+                <>
+                  <AdminNavbar />
+                  <AdminDashboard />
+                </>
               </RequireAuth>
             }
           />
@@ -57,7 +60,21 @@ function AppContent() {
             path="/adminpage/logs"
             element={
               <RequireAuth>
-                <AdminLogs />
+                <>
+                  <AdminNavbar />
+                  <AdminLogs />
+                </>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/adminpage/random-bid"
+            element={
+              <RequireAuth>
+                <>
+                  <AdminNavbar />
+                  <RandomBid />
+                </>
               </RequireAuth>
             }
           />

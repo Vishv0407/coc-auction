@@ -21,7 +21,7 @@ const RequireAuth = ({ children }) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-[#010815] flex items-center justify-center p-4 lg:pl-64">
+      <div className="min-h-screen bg-gray-50 dark:bg-[#010815] flex items-center justify-center p-4 ">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 max-w-md w-full">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">
             Admin Authentication
