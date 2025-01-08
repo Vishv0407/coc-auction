@@ -1,11 +1,19 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import toast from 'react-hot-toast';
 
 const WebSocketContext = createContext();
 
 export const WebSocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [players, setPlayers] = useState([]);
+
+  const isDarkTheme = document.documentElement.classList.contains('dark');
+  const toastStyle = {
+    background: isDarkTheme ? "#FFFFFF" : "#374151",
+    color: isDarkTheme ? "#000000" : "#FFFFFF",
+    fontSize: "21px",
+  };
 
   useEffect(() => {
     const wsUrl = import.meta.env.VITE_WS_URL || 'http://localhost:5000';
@@ -40,6 +48,18 @@ export const WebSocketProvider = ({ children }) => {
         const newPlayers = prev.map(player => 
           player.id === updatedPlayer.id ? updatedPlayer : player
         );
+        
+        // Show toast based on operation type
+        if (updatedPlayer.operation === 'update') {
+          toast.success("Player updated successfully!", {
+            style: toastStyle,
+          });
+        } else {
+          toast.success("Player sold successfully!", {
+            style: toastStyle,
+          });
+        }
+        
         return newPlayers;
       });
     });

@@ -108,19 +108,8 @@ const AdminDashboard = () => {
       );
 
       if (response.ok) {
-        const data = await response.json();
         closeModal();
-        
-        // Show single toast based on whether player was previously sold
-        if (selectedPlayer.sold) {
-          toast.success("Player updated successfully!", {
-            style: toastStyle,
-          });
-        } else {
-          toast.success("Player sold successfully!", {
-            style: toastStyle,
-          });
-        }
+        // Don't show toast here - it will be handled by the WebSocket event
       } else {
         throw new Error('Failed to update player');
       }

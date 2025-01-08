@@ -112,7 +112,7 @@ const RandomBid = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 pt-8 md:pt-0 p-4 relative">
-      <div className="max-w-7xl mx-auto pb-24">
+      <div className="max-w-full px-20 mx-auto pb-24">
         <Link
           to="/adminpage/dashboard"
           className="inline-flex items-center text-gray-300 hover:text-white transition-colors mb-6"
@@ -146,7 +146,7 @@ const RandomBid = () => {
         </div>
 
         {/* Players Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-8">
           {availablePlayers.length > 0 ? (
             availablePlayers.map((player, index) => (
               <motion.div
@@ -173,9 +173,9 @@ const RandomBid = () => {
                 className="bg-gray-800 rounded-xl p-6 transform transition-all shadow-lg"
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <div className={`p-2 rounded-full bg-white/10`}>
+                  {/* <div className={`p-2 rounded-full bg-white/10`}>
                     {getPositionIcon(player.position)}
-                  </div>
+                  </div> */}
                   <h3 className="text-2xl font-bold text-white">
                     {player.name}
                   </h3>
@@ -184,7 +184,7 @@ const RandomBid = () => {
               </motion.div>
             ))
           ) : (
-            <div className="col-span-4 text-center py-8">
+            <div className="col-span-6 text-center py-8">
               <p className="text-gray-400 text-xl">
                 No players available for this position
               </p>
@@ -216,7 +216,7 @@ const RandomBid = () => {
           </h2>
           {soldPlayers.filter((p) => p.position === selectedPosition).length >
           0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
               {soldPlayers
                 .filter((p) => p.position === selectedPosition)
                 .map((player) => {
