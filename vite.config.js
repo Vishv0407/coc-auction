@@ -17,12 +17,14 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: process.env.VITE_API_URL || 'http://localhost:5000', // Fallback to localhost if not defined
-        changeOrigin: true,
-      },
-      '/socket.io': {
         target: process.env.VITE_API_URL || 'http://localhost:5000',
         changeOrigin: true,
+        secure: false,
+      },
+      '/socket.io': {
+        target: process.env.VITE_WS_URL || 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
         ws: true,
       },
     },
@@ -37,8 +39,7 @@ export default defineConfig({
     },
   },
   define: {
-    // If you need to use process.env in your app
-    'process.env': {}
+    'process.env': process.env
   },
   darkMode: 'class',
 })

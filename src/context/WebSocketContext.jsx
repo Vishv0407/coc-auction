@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import toast from 'react-hot-toast';
 
 const WebSocketContext = createContext();
 
@@ -8,10 +9,26 @@ export const WebSocketProvider = ({ children }) => {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
-    const newSocket = io(import.meta.env.VITE_WS_URL || 'http://localhost:5000');
-    setSocket(newSocket);
+    const wsUrl = import.meta.env.VITE_WS_URL || 'http://localhost:5000';
+    const newSocket = io(wsUrl, {
+      transports: ['websocket'],
+      secure: true,
+      rejectUnauthorized: false,
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000
+    });
 
-    // Fetch initial players data
+    newSocket.on('connect', () => {
+      console.log('WebSocket Connected');
+    });
+
+    newSocket.on('connect_error', (error) => {
+      console.error('WebSocket Connection Error:', error);
+      toast.error('Connection error. Retrying...');
+    });
+
+    setSocket(newSocket);
     fetchPlayers();
 
     return () => newSocket.close();
@@ -20,21 +37,19 @@ export const WebSocketProvider = ({ children }) => {
   useEffect(() => {
     if (!socket) return;
 
-    // Handle player updates
     socket.on('playerUpdated', (updatedPlayer) => {
       setPlayers(prev => {
-        const playerExists = prev.some(p => p._id === updatedPlayer._id);
-        if (playerExists) {
-          return prev.map(player => 
-            player._id === updatedPlayer._id ? updatedPlayer : player
-          );
-        } else {
-          return [...prev, updatedPlayer];
-        }
+        const newPlayers = prev.map(player => 
+          player.id === updatedPlayer.id ? updatedPlayer : player
+        );
+        
+        // Show toast notification
+        toast.success(`${updatedPlayer.name} has been ${updatedPlayer.sold ? 'sold' : 'updated'}!`);
+        
+        return newPlayers;
       });
     });
 
-    // Cleanup listener on unmount
     return () => {
       socket.off('playerUpdated');
     };
@@ -42,11 +57,13 @@ export const WebSocketProvider = ({ children }) => {
 
   const fetchPlayers = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/players`);
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await fetch(`${apiUrl}/players`);
       const data = await response.json();
       setPlayers(data);
     } catch (error) {
       console.error('Error fetching players:', error);
+      toast.error('Failed to fetch players');
     }
   };
 
