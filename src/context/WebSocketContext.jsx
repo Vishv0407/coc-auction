@@ -20,13 +20,24 @@ export const WebSocketProvider = ({ children }) => {
   useEffect(() => {
     if (!socket) return;
 
+    // Handle player updates
     socket.on('playerUpdated', (updatedPlayer) => {
-      setPlayers(prev => 
-        prev.map(player => 
-          player._id === updatedPlayer._id ? updatedPlayer : player
-        )
-      );
+      setPlayers(prev => {
+        const playerExists = prev.some(p => p._id === updatedPlayer._id);
+        if (playerExists) {
+          return prev.map(player => 
+            player._id === updatedPlayer._id ? updatedPlayer : player
+          );
+        } else {
+          return [...prev, updatedPlayer];
+        }
+      });
     });
+
+    // Cleanup listener on unmount
+    return () => {
+      socket.off('playerUpdated');
+    };
   }, [socket]);
 
   const fetchPlayers = async () => {
@@ -40,7 +51,7 @@ export const WebSocketProvider = ({ children }) => {
   };
 
   return (
-    <WebSocketContext.Provider value={{ socket, players }}>
+    <WebSocketContext.Provider value={{ socket, players, fetchPlayers }}>
       {children}
     </WebSocketContext.Provider>
   );

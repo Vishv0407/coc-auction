@@ -42,6 +42,10 @@ io.on('connection', (socket) => {
     io.emit('playerUpdated', data);
   });
 
+  socket.on('playerUpdated', (data) => {
+    io.emit('playerUpdated', data);
+  });
+
   socket.on('disconnect', () => {
     // console.log('Client disconnected');
   });

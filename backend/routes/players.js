@@ -71,12 +71,16 @@ router.post('/sell', async (req, res) => {
         color: teamColors[team]  // Add the color field
       });
       
+      req.app.get('io').emit('playerUpdated', player);
+
       res.json({
         message: 'Player sold successfully',
         player,
         team: newTeam
       });
     } else {
+      req.app.get('io').emit('playerUpdated', player);
+
       res.json({
         message: 'Player sold successfully',
         player,
