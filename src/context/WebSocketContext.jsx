@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import io from 'socket.io-client';
-import toast from 'react-hot-toast';
 
 const WebSocketContext = createContext();
 
@@ -25,7 +24,6 @@ export const WebSocketProvider = ({ children }) => {
 
     newSocket.on('connect_error', (error) => {
       console.error('WebSocket Connection Error:', error);
-      toast.error('Connection error. Retrying...');
     });
 
     setSocket(newSocket);
@@ -42,10 +40,6 @@ export const WebSocketProvider = ({ children }) => {
         const newPlayers = prev.map(player => 
           player.id === updatedPlayer.id ? updatedPlayer : player
         );
-        
-        // Show toast notification
-        toast.success(`${updatedPlayer.name} has been ${updatedPlayer.sold ? 'sold' : 'updated'}!`);
-        
         return newPlayers;
       });
     });
@@ -63,7 +57,6 @@ export const WebSocketProvider = ({ children }) => {
       setPlayers(data);
     } catch (error) {
       console.error('Error fetching players:', error);
-      toast.error('Failed to fetch players');
     }
   };
 

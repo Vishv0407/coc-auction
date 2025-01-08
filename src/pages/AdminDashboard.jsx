@@ -87,21 +87,7 @@ const AdminDashboard = () => {
       return;
     }
 
-    // Add balance validation
-    const teamBalance = getTeamBalance(selectedTeam);
-    const priceValue = parseInt(price);
-    if (teamBalance - priceValue < 0) {
-      toast.error(`${selectedTeam} cannot afford ${priceValue.toLocaleString()} credits`, {
-        style: toastStyle,
-      });
-      return;
-    }
-
     try {
-      const currentTime = Date.now();
-      const formattedTeam = selectedTeam.charAt(0).toUpperCase() + selectedTeam.slice(1);
-
-      // First, handle the player sale/update
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/players/sell`,
         {
@@ -113,73 +99,34 @@ const AdminDashboard = () => {
             playerId: selectedPlayer.id,
             name: selectedPlayer.name,
             position: selectedPlayer.position,
-            team: formattedTeam,
+            team: selectedTeam,
             price: parseInt(price),
-            modifiedTime: currentTime,
+            modifiedTime: Date.now(),
             sold: true
           }),
         }
       );
 
       if (response.ok) {
-        const responseData = await response.json();
-        const updatedPlayer = {
-          ...selectedPlayer,
-          sold: true,
-          team: selectedTeam,
-          price: parseInt(price),
-          modifiedTime: currentTime
-        };
-
-        // Update local state
-        setPlayers((prevPlayers) =>
-          prevPlayers.map((player) =>
-            player.id === updatedPlayer.id ? updatedPlayer : player
-          )
-        );
-
-        // Emit socket event
-        socket.emit("playerSold", updatedPlayer);
-
-        // Create transaction log
-        const logResponse = await fetch(
-          `${import.meta.env.VITE_API_URL}/logs`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              playerName: selectedPlayer.name,
-              playerId: selectedPlayer.id,
-              codolioLink: selectedPlayer.codolio_link || "",
-              soldTo: formattedTeam,
-              price: parseInt(price),
-              action: selectedPlayer.sold ? "update" : "sell"
-            }),
-          }
-        );
-
-        if (!logResponse.ok) {
-          console.error("Failed to create transaction log");
-          toast.error("Failed to log transaction", {
+        const data = await response.json();
+        closeModal();
+        
+        // Show single toast based on whether player was previously sold
+        if (selectedPlayer.sold) {
+          toast.success("Player updated successfully!", {
+            style: toastStyle,
+          });
+        } else {
+          toast.success("Player sold successfully!", {
             style: toastStyle,
           });
         }
-
-        closeModal();
-        toast.success(
-          selectedPlayer.sold
-            ? "Player updated successfully!"
-            : "Player sold successfully!",
-          {
-            style: toastStyle,
-          }
-        );
+      } else {
+        throw new Error('Failed to update player');
       }
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("An error occurred", {
+      console.error('Error:', error);
+      toast.error("Failed to update player", {
         style: toastStyle,
       });
     }

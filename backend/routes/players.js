@@ -28,19 +28,9 @@ router.post('/sell', async (req, res) => {
   try {
     const { playerId, name, position, team, price, modifiedTime } = req.body;
 
-    // Validate team name exists in valid teams
-    const validTeams = ['Barbarians', 'Giants', 'Pekkas', 'Wizards'];
-    if (!validTeams.includes(team)) {
-      return res.status(400).json({ message: 'Invalid team name' });
-    }
-
-    // Map team names to their colors
-    const teamColors = {
-      'Barbarians': 'bg-yellow-500',
-      'Giants': 'bg-red-500',
-      'Pekkas': 'bg-purple-500',
-      'Wizards': 'bg-blue-500'
-    };
+    // Check if player already exists
+    const existingPlayer = await Player.findOne({ id: playerId });
+    const isUpdate = existingPlayer && existingPlayer.sold;
 
     // Find and update player
     const player = await Player.findOneAndUpdate(
@@ -63,30 +53,17 @@ router.post('/sell', async (req, res) => {
       { new: true }
     );
 
-    if (!updatedTeam) {
-      // If team not found, create it with initial wallet and color
-      const newTeam = await Team.create({
-        name: team,
-        wallet: 25000 - price,
-        color: teamColors[team]  // Add the color field
-      });
-      
-      req.app.get('io').emit('playerUpdated', player);
+    // Emit socket event with operation type
+    req.app.get('io').emit('playerUpdated', { 
+      ...player.toObject(),
+      operation: isUpdate ? 'update' : 'sold'
+    });
 
-      res.json({
-        message: 'Player sold successfully',
-        player,
-        team: newTeam
-      });
-    } else {
-      req.app.get('io').emit('playerUpdated', player);
-
-      res.json({
-        message: 'Player sold successfully',
-        player,
-        team: updatedTeam
-      });
-    }
+    res.json({
+      message: isUpdate ? 'Player updated successfully' : 'Player sold successfully',
+      player,
+      team: updatedTeam
+    });
 
   } catch (error) {
     console.error('Error in /sell route:', error);
