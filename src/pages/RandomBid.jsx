@@ -111,7 +111,7 @@ const RandomBid = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-900 pt-8 md:pt-0 p-4 relative">
+    <div className="min-h-screen bg-[#010815] pt-8 md:pt-6 p-4 relative">
       <div className="max-w-full px-20 mx-auto pb-24">
         <Link
           to="/adminpage/dashboard"
@@ -122,7 +122,7 @@ const RandomBid = () => {
         </Link>
 
         {/* Position Selection */}
-        <div className="bg-gray-800 rounded-2xl p-8 mb-8 shadow-lg">
+        <div className="bg-gray-900 rounded-2xl p-8 mb-8 shadow-lg">
           <h1 className="text-4xl font-bold text-white mb-6 text-center">
             Random Player Generator
           </h1>
@@ -170,7 +170,7 @@ const RandomBid = () => {
                         },
                       }
                 }
-                className="bg-gray-800 rounded-xl p-6 transform transition-all shadow-lg"
+                className="bg-gray-900 rounded-xl p-6 transform transition-all shadow-lg"
               >
                 <div className="flex items-center gap-3 mb-2">
                   {/* <div className={`p-2 rounded-full bg-white/10`}>
@@ -227,10 +227,15 @@ const RandomBid = () => {
                       onClick={() => handleSoldPlayerClick(player)}
                       className={`${teamInfo.color} rounded-xl p-6 
                         shadow-lg transform hover:scale-[1.02] transition-all duration-300
-                        cursor-pointer`}
+                        cursor-pointer flex`}
                     >
+                      <img
+                        src={teamInfo.icon}
+                        alt={player.team}
+                        className="w-10 h-10 mt-2 mr-4"
+                      />
                       <div className="flex items-center gap-3 mb-2">
-                        <PositionIcon
+                        {/* <PositionIcon
                           position={player.position}
                           className={`${
                             soldPlayers.some(
@@ -239,7 +244,7 @@ const RandomBid = () => {
                               ? "bg-white/70"
                               : "bg-white/10"
                           }`}
-                        />
+                        /> */}
                         <div>
                           <h3 className="text-xl font-bold text-white">
                             {player.name}
@@ -249,17 +254,12 @@ const RandomBid = () => {
                           </p>
                         </div>
                       </div>
-                      <img
-                        src={teamInfo.icon}
-                        alt={player.team}
-                        className="w-10 h-10 mt-2"
-                      />
                     </div>
                   );
                 })}
             </div>
           ) : (
-            <div className="bg-gray-800 rounded-xl p-8 text-center">
+            <div className="bg-gray-900 rounded-xl p-8 text-center">
               <p className="text-gray-400 text-xl">No players sold yet</p>
             </div>
           )}
@@ -280,7 +280,7 @@ const RandomBid = () => {
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.5, opacity: 0 }}
-                className="fixed z-[101] bg-gray-800 rounded-xl p-8 shadow-2xl
+                className="fixed z-[101] bg-gray-900 rounded-xl p-8 shadow-2xl
                   border border-gray-700 w-[90%] max-w-md left-[5%] md:left-[40%]"
                 style={{
                   top: "30%",
@@ -295,15 +295,15 @@ const RandomBid = () => {
                   <FaTimes size={24} />
                 </button>
 
-                <h2 className="text-2xl font-bold text-white mb-6">
+                {/* <h2 className="text-2xl font-bold text-white mb-6">
                   Selected Player
-                </h2>
+                </h2> */}
 
-                <div className="bg-gray-700 rounded-lg p-4 mb-6">
-                  <h3 className="text-xl font-bold text-white mb-2">
+                <div className="bg-gray-700 rounded-lg p-4 mb-6 mt-6">
+                  <h3 className="text-3xl text-center font-bold text-white mb-2">
                     {selectedPlayer.name}
                   </h3>
-                  <p className="text-gray-300 capitalize">
+                  <p className="text-gray-300 text-center capitalize">
                     {selectedPlayer.position}
                   </p>
                 </div>
