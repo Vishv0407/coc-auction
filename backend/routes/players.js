@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Player = require('../models/Player');
 const Team = require('../models/Team');
+const TransactionLog = require('../models/TransactionLog');
 
 // Get all players
 router.get('/', async (req, res) => {
@@ -52,6 +53,18 @@ router.post('/sell', async (req, res) => {
       { $inc: { wallet: -price } },
       { new: true }
     );
+
+    // Create transaction log
+    const transactionLog = new TransactionLog({
+      playerName: name,
+      playerId: playerId,
+      codolioLink: player.codolioLink || null, // Add this if available in your player data
+      soldTo: team,
+      price: price,
+      action: isUpdate ? 'update' : 'sell'
+    });
+
+    await transactionLog.save();
 
     // Emit socket event with operation type
     req.app.get('io').emit('playerUpdated', { 
