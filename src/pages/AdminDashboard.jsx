@@ -138,7 +138,8 @@ const AdminDashboard = () => {
             team: selectedTeam,
             price: newPrice,
             modifiedTime: Date.now(),
-            sold: true
+            sold: true,
+            codolioLink: selectedPlayer.codolio_link || null,
           }),
         }
       );

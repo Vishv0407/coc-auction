@@ -27,7 +27,7 @@ router.get('/unsold', async (req, res) => {
 // POST route for selling a player
 router.post('/sell', async (req, res) => {
   try {
-    const { playerId, name, position, team, price, modifiedTime } = req.body;
+    const { playerId, name, position, team, price, modifiedTime, codolioLink } = req.body;
 
     // Check if player already exists
     const existingPlayer = await Player.findOne({ id: playerId });
@@ -42,7 +42,8 @@ router.post('/sell', async (req, res) => {
         team,
         price,
         modifiedTime,
-        sold: true
+        sold: true,
+        codolioLink
       },
       { new: true, upsert: true }
     );
