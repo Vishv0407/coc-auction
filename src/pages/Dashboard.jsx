@@ -196,52 +196,66 @@ const Dashboard = () => {
 
         {/* Players Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-  {filteredPlayers.map(player => {
-    const teamInfo = player.team ? teamData[player.team] : null;
-    const isSold = player.sold;
-
-    return (
-      <div
-        key={player.id}
-        className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-100'} 
-          rounded-xl overflow-hidden shadow-lg
-          transform hover:scale-105 transition-all duration-300`}
-      >
-        <div className={`p-4 ${teamInfo ? '' : 'border-[1px] border-gray-300'} 
-          ${!isSold ? 'min-h-[160px] rounded-xl' : ''}`}> 
-          <div className="flex justify-between items-start">
-            <div>
-              <a 
-                href={player.codolio_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`text-xl font-bold hover:underline ${teamInfo ? 'text-white' : 'text-gray-800'}`}
-              >
-                {player.name}
-              </a>
-              <p className={`capitalize ${teamInfo ? 'text-white opacity-90' : 'text-gray-600'}`}>
-                {player.position}
-              </p>
-            </div>
-            {teamInfo && (
-              <img src={teamInfo.icon} alt={player.team} className="w-10 h-10" />
-            )}
-          </div>
-          {isSold ? (
-            <div className={`mt-4 ${teamInfo ? 'text-white' : 'text-gray-800'}`}>
-              <p className="text-sm opacity-90">Sold to {player.team}</p>
-              <div className="text-2xl font-bold flex gap-[1px] items-center"><SiElixir className='text-white text-[20px] rotate-[25deg]'/>{player.price.toLocaleString()}</div>
+          {filteredPlayers.length === 0 ? (
+            <div className="col-span-full bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
+              <div className="flex flex-col items-center gap-4 text-center">
+                <FaSearch className="text-4xl text-gray-400" />
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  No Players Found
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  No players match your search "{searchTerm}"
+                </p>
+              </div>
             </div>
           ) : (
-            <div className="mt-4">
-              <p className="text-gray-600 font-semibold">Unsold</p>
-            </div>
+            filteredPlayers.map(player => {
+              const teamInfo = player.team ? teamData[player.team] : null;
+              const isSold = player.sold;
+
+              return (
+                <div
+                  key={player.id}
+                  className={`${teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-100'} 
+                    rounded-xl overflow-hidden shadow-lg
+                    transform hover:scale-105 transition-all duration-300`}
+                >
+                  <div className={`p-4 ${teamInfo ? '' : 'border-[1px] border-gray-300'} 
+                    ${!isSold ? 'min-h-[160px] rounded-xl' : ''}`}> 
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <a 
+                          href={player.codolio_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`text-xl font-bold hover:underline ${teamInfo ? 'text-white' : 'text-gray-800'}`}
+                        >
+                          {player.name}
+                        </a>
+                        <p className={`capitalize ${teamInfo ? 'text-white opacity-90' : 'text-gray-600'}`}>
+                          {player.position}
+                        </p>
+                      </div>
+                      {teamInfo && (
+                        <img src={teamInfo.icon} alt={player.team} className="w-10 h-10" />
+                      )}
+                    </div>
+                    {isSold ? (
+                      <div className={`mt-4 ${teamInfo ? 'text-white' : 'text-gray-800'}`}>
+                        <p className="text-sm opacity-90">Sold to {player.team}</p>
+                        <div className="text-2xl font-bold flex gap-[1px] items-center"><SiElixir className='text-white text-[20px] rotate-[25deg]'/>{player.price.toLocaleString()}</div>
+                      </div>
+                    ) : (
+                      <div className="mt-4">
+                        <p className="text-gray-600 font-semibold">Unsold</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })
           )}
         </div>
-      </div>
-    );
-  })}
-</div>
 
       </div>
     </div>

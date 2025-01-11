@@ -79,12 +79,48 @@ const AdminDashboard = () => {
     fontSize: "21px",
   };
 
+  const getTeamBalance = (teamName, excludePlayerId = null) => {
+    const teamPlayers = players.filter(
+      (p) => p.team === teamName && p.id !== excludePlayerId
+    );
+    const spentAmount = teamPlayers.reduce((sum, p) => sum + (p.price || 0), 0);
+    const initialBalance = teamData[teamName].wallet;
+    return initialBalance - spentAmount;
+  };
+
   const handleSubmit = async () => {
     if (!selectedPlayer || !selectedTeam || !price) {
       toast.error("Please fill all fields", {
         style: toastStyle,
       });
       return;
+    }
+
+    const newPrice = parseInt(price);
+    const oldPrice = selectedPlayer.sold ? (selectedPlayer.price || 0) : 0;
+    const priceDifference = newPrice - oldPrice;
+
+    // If it's an update and team hasn't changed, check balance differently
+    const isSameTeam = selectedPlayer.team === selectedTeam;
+    const availableBalance = isSameTeam 
+      ? getTeamBalance(selectedTeam, selectedPlayer.id) + oldPrice 
+      : getTeamBalance(selectedTeam);
+
+    // Check if team can afford the price difference
+    if (isSameTeam) {
+      if (availableBalance < newPrice) {
+        toast.error(`${selectedTeam} cannot afford this price`, {
+          style: toastStyle,
+        });
+        return;
+      }
+    } else {
+      if (availableBalance < newPrice) {
+        toast.error(`${selectedTeam} cannot afford this price`, {
+          style: toastStyle,
+        });
+        return;
+      }
     }
 
     try {
@@ -100,32 +136,24 @@ const AdminDashboard = () => {
             name: selectedPlayer.name,
             position: selectedPlayer.position,
             team: selectedTeam,
-            price: parseInt(price),
+            price: newPrice,
             modifiedTime: Date.now(),
             sold: true
           }),
         }
       );
 
-      if (response.ok) {
-        closeModal();
-        // Don't show toast here - it will be handled by the WebSocket event
-      } else {
+      if (!response.ok) {
         throw new Error('Failed to update player');
       }
+
+      closeModal();
     } catch (error) {
       console.error('Error:', error);
       toast.error("Failed to update player", {
         style: toastStyle,
       });
     }
-  };
-
-  const getTeamBalance = (teamName) => {
-    const teamPlayers = players.filter((p) => p.team === teamName);
-    const spentAmount = teamPlayers.reduce((sum, p) => sum + (p.price || 0), 0);
-    const initialBalance = teamData[teamName].wallet;
-    return initialBalance - spentAmount;
   };
 
   return (

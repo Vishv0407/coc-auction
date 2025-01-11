@@ -12,8 +12,8 @@ export const WebSocketProvider = ({ children }) => {
 
   const isDarkTheme = document.documentElement.classList.contains('dark');
   const toastStyle = {
-    background: isDarkTheme ? "#FFFFFF" : "#374151",
-    color: isDarkTheme ? "#000000" : "#FFFFFF",
+    background: isDarkTheme ? "#000000" : "#FFFFFF",
+    color: isDarkTheme ? "#FFFFFF" : "#374151",
     fontSize: "21px",
   };
 

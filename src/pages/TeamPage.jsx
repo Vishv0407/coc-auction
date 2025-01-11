@@ -209,15 +209,31 @@ const TeamPage = () => {
               className="flex flex-col items-center justify-center py-16 px-4 bg-white dark:bg-gray-900"
             >
               <div className="text-center space-y-4">
-                <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 inline-block">
-                  <SiElixir className="text-[#E11ADB] text-4xl" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-                  No Players Bought Yet
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 max-w-md">
-                  Players will appear here once they are bought in the auction for {teamName}
-                </p>
+                {searchTerm ? (
+                  <>
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 inline-block">
+                      <FaSearch className="text-gray-400 text-4xl" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+                      No Players Found
+                    </h3>
+                    <p className="text-gray-500 dark:text-gray-400 max-w-md">
+                      No players match your search "{searchTerm}"
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 inline-block">
+                      <SiElixir className="text-[#E11ADB] text-4xl" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+                      No Players Bought Yet
+                    </h3>
+                    <p className="text-gray-500 dark:text-gray-400 max-w-md">
+                      Players will appear here once they are bought in the auction for {teamName}
+                    </p>
+                  </>
+                )}
               </div>
             </motion.div>
           ) : (
