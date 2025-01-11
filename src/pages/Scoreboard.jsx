@@ -11,11 +11,11 @@ const getPositionIcon = (position) => {
     case 'leader':
       return <FaCrown className="text-yellow-500 text-3xl" />;
     case 'co-leader':
-      return <GiQueenCrown className="text-purple-500 text-3xl" />;
+      return <FaCrown className="text-yellow-500 text-2xl" />;
     case 'elder':
-      return <GiCrownedSkull className="text-blue-500 text-3xl" />;
+      return <GiQueenCrown className="text-blue-500 text-2xl" />;
     case 'member':
-      return <HiUserGroup className="text-gray-500 text-3xl" />;
+      return <HiUserGroup className="text-gray-500 text-2xl" />;
     default:
       return null;
   }
@@ -65,12 +65,26 @@ const Scoreboard = () => {
         <div className="space-y-4">
           {filteredPlayers.map((player) => {
             const teamInfo = player.team ? teamData[player.team] : null;
+            let bgColorClass = 'bg-white dark:bg-gray-900';
+            
+            // Set background color based on position
+            switch (player.position.toLowerCase()) {
+              case 'co-leader':
+                bgColorClass = 'bg-[#CE8946]/10 dark:bg-emerald-600/40';
+                break;
+              case 'elder':
+                bgColorClass = 'bg-[#C0C0C0]/20 dark:bg-[#C0C0C0]/40';
+                break;
+              case 'member':
+                bgColorClass = 'bg-emerald-100/30 dark:bg-[#CE8946]/40';
+                break;
+            }
 
             return (
               <div
                 key={player.id}
                 className={`${
-                  teamInfo ? teamInfo.color : 'bg-white dark:bg-gray-900'
+                  teamInfo ? teamInfo.color : bgColorClass
                 } rounded-xl shadow-lg transform hover:scale-[1.01] transition-all duration-150`}
               >
                 <div className="p-4">
@@ -82,6 +96,9 @@ const Scoreboard = () => {
                         #{player.id}
                       </span>
                       <div className="flex items-center gap-4">
+                      <div className="bg-gray-100 dark:bg-white border-[1px] dark:border-0 rounded-full p-[4px] w-[1.15rem] h-[1.15rem] sm:w-10 sm:h-10 flex items-center justify-center">
+                          {getPositionIcon(player.position)}
+                        </div>
                         <div>
                           <a
                             href={player.codolio_link}
@@ -96,15 +113,20 @@ const Scoreboard = () => {
                           <div className={`capitalize mt-1 flex gap-2 items-center ${
                             teamInfo ? 'text-white opacity-90' : 'text-gray-600 dark:text-gray-400'
                           }`}>
-                            <div className="bg-gray-100 dark:bg-white border-[1px] dark:border-0 rounded-full p-[4px] w-[1.15rem] h-[1.15rem] sm:w-5 sm:h-5 flex items-center justify-center">
-                          {getPositionIcon(player.position)}
-                        </div>
+                            
                             <p>{player.position}</p>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
+                    <div className={`text-center border-r-2 border-gray-700 dark:border-gray-400 pr-4 ${
+                        teamInfo ? 'text-white' : 'text-gray-800 dark:text-gray-200'
+                      }`}>
+                        <p className="text-sm opacity-80">Final Score</p>
+                        <p className="text-xl font-bold">{player.best_score}</p>
+                      </div>
+
                       <div className={`text-center ${
                         teamInfo ? 'text-white' : 'text-gray-800 dark:text-gray-200'
                       }`}>
@@ -117,6 +139,7 @@ const Scoreboard = () => {
                         <p className="text-sm opacity-80">Q2 Score</p>
                         <p className="text-xl font-bold">{player.q2_score}</p>
                       </div>
+                      
                     </div>
                   </div>
                 </div>

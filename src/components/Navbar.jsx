@@ -17,7 +17,7 @@ const Navbar = () => {
   const location = useLocation();
   const [isTeamsOpen, setIsTeamsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
   const isActive = (path) => location.pathname === path;
 

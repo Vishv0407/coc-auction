@@ -20,9 +20,9 @@ const TeamPage = () => {
   const team = teamData[teamName.charAt(0).toUpperCase() + teamName.slice(1)];
 
   const clanLeaders = [
-    { name: "Vishv Boda", clan: "Barbarians", codolio_link: "https://codolio.com/leader1" },
+    { name: "Vishv Boda", clan: "Barbarians", codolio_link: "https://codolio.com/vishv0407" },
     { name: "Meet Rathi", clan: "Giants", codolio_link: "https://codolio.com/leader2" },
-    { name: "Jay Shah", clan: "Pekkas", codolio_link: "https://codolio.com/leader3" },
+    { name: "Jay Shah", clan: "Pekkas", codolio_link: "https://codolio.com/jays" },
     { name: "Dev Kansara", clan: "Wizards", codolio_link: "https://codolio.com/leader4" },
   ].filter(leader => leader.clan === teamName.charAt(0).toUpperCase() + teamName.slice(1));
 
@@ -202,47 +202,67 @@ const TeamPage = () => {
           </div>
 
           {/* Table Body */}
-          <div className="divide-y divide-gray-200 dark:divide-gray-500">
-            {filteredPlayers.map((player, index) => (
-              <motion.div
-                key={player.id}
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1 }}
-                className="px-6 py-4 hover:bg-white dark:bg-gray-800 transition-colors"
-              >
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <div className="col-span-1 text-gray-500 font-medium dark:text-gray-300">
-                    {index + 1}
-                  </div>
-                  <div className="col-span-7">
-                    <div className="flex items-center space-x-4">
-                      <div className="p-2 bg-gray-100 rounded-full">
-                        {getPositionIcon(player.position)}
-                      </div>
-                      <div>
-                        <a 
-                          href={player.codolio_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-lg font-semibold dark:text-gray-300 hover:underline"
-                        >
-                          {player.name}
-                        </a>
-                        <p className="text-gray-600 capitalize dark:text-gray-400">{player.position}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-span-4 flex justify-end">
-                    <div className="text-2xl font-bold text-gray-800 dark:text-gray-300 flex gap-[1px] items-center">
-                      <SiElixir className='text-[#E11ADB] text-[20px] rotate-[25deg]'/>
-                      {player.price.toLocaleString()}
-                    </div>
-                  </div>
+          {filteredPlayers.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center justify-center py-16 px-4 bg-white dark:bg-gray-900"
+            >
+              <div className="text-center space-y-4">
+                <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 inline-block">
+                  <SiElixir className="text-[#E11ADB] text-4xl" />
                 </div>
-              </motion.div>
-            ))}
-          </div>
+                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+                  No Players Bought Yet
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 max-w-md">
+                  Players will appear here once they are bought in the auction for {teamName}
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <div className="divide-y divide-gray-200 dark:divide-gray-500">
+              {filteredPlayers.map((player, index) => (
+                <motion.div
+                  key={player.id}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="px-6 py-4 hover:bg-white dark:bg-gray-800 transition-colors"
+                >
+                  <div className="grid grid-cols-12 gap-4 items-center">
+                    <div className="col-span-1 text-gray-500 font-medium dark:text-gray-300">
+                      {index + 1}
+                    </div>
+                    <div className="col-span-7">
+                      <div className="flex items-center space-x-4">
+                        <div className="p-2 bg-gray-100 rounded-full">
+                          {getPositionIcon(player.position)}
+                        </div>
+                        <div>
+                          <a 
+                            href={player.codolio_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-lg font-semibold dark:text-gray-300 hover:underline"
+                          >
+                            {player.name}
+                          </a>
+                          <p className="text-gray-600 capitalize dark:text-gray-400">{player.position}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-span-4 flex justify-end">
+                      <div className="text-2xl font-bold text-gray-800 dark:text-gray-300 flex gap-[1px] items-center">
+                        <SiElixir className='text-[#E11ADB] text-[20px] rotate-[25deg]'/>
+                        {player.price.toLocaleString()}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
