@@ -18,6 +18,8 @@ const Navbar = () => {
   const [isTeamsOpen, setIsTeamsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const isActive = (path) => location.pathname === path;
 
@@ -52,6 +54,29 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
+
+  // Control navbar visibility on scroll
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        // Scrolling UP or at top
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling DOWN and not at top
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+    
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
 
   const NavLinks = () => (
     <nav className="space-y-2">
@@ -151,7 +176,14 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navbar */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white dark:bg-[#010815] dark:border-b-[1px] dark:border-b-gray-800 shadow-lg z-50">
+      <motion.div
+        initial={{ y: 0 }}
+        animate={{ y: isVisible ? 0 : -100 }}
+        transition={{ duration: 0.3 }}
+        className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white 
+                  dark:bg-[#010815] dark:border-b-[1px] 
+                  dark:border-b-gray-800 shadow-lg z-50"
+      >
         <div className="flex items-center justify-between px-4 h-full">
           <Link to="/" className="text-xl font-bold text-gray-800 dark:text-gray-300">
             Clash of Codes
@@ -171,7 +203,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

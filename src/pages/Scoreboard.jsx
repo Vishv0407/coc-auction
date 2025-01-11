@@ -45,7 +45,7 @@ const Scoreboard = () => {
 
         {/* Search Control */}
         <div className="flex flex-col sm:flex-row sm:justify-end items-start md:items-center pb-8">
-          <div className="relative w-full mb-4 sm:mb-0">
+          <div className="relative w-full mb-0 shadow-lg rounded-lg">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
