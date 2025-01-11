@@ -88,11 +88,11 @@ function AppContent() {
 
 function App() {
   return (
-    <WebSocketProvider>
-      <Router>
+    <Router>
+      <WebSocketProvider>
         <AppContent />
-      </Router>
-    </WebSocketProvider>
+      </WebSocketProvider>
+    </Router>
   );
 }
 
