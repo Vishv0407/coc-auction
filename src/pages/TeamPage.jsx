@@ -19,16 +19,10 @@ const TeamPage = () => {
 
   const team = teamData[teamName.charAt(0).toUpperCase() + teamName.slice(1)];
 
-  const clanLeaders = [
-    { name: "Vishv Boda", clan: "Barbarians", codolio_link: "https://codolio.com/leader1" },
-    { name: "Meet Rathi", clan: "Giants", codolio_link: "https://codolio.com/leader2" },
-    { name: "Jay Shah", clan: "Pekkas", codolio_link: "https://codolio.com/leader3" },
-    { name: "Dev Kansara", clan: "Wizards", codolio_link: "https://codolio.com/leader4" },
-  ].filter(leader => leader.clan === teamName.charAt(0).toUpperCase() + teamName.slice(1));
-
   useEffect(() => {
     const teamPlayers = playersData.players
       .map(player => {
+        console.log(player);
         const soldPlayer = soldPlayers.find(sp => sp.id === player.id);
         return soldPlayer || player;
       })
@@ -105,31 +99,6 @@ const TeamPage = () => {
           </h1>
           <div className="h-1 w-32 mx-auto bg-gradient-to-r from-gray-300 to-gray-500 dark:from-gray-500 dark:to-gray-300 rounded-full mb-8" />
           
-          <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="bg-white dark:bg-gray-900 w-full md:w-[40%] mx-auto rounded-xl shadow-lg p-6 mb-8"
-        >
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Clan Leader</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {clanLeaders.map((leader, index) => (
-              <div key={index} className="flex justify-center items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <FaCrown className="text-yellow-500 text-xl" />
-                <div>
-                  <a 
-                    href={leader.codolio_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-2xl font-semibold text-gray-800 dark:text-gray-200 hover:underline"
-                  >
-                    {leader.name}
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
           {/* Team Stats */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
