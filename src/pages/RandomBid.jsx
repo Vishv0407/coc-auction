@@ -23,6 +23,10 @@ const RandomBid = () => {
   const [soldPlayers, setSoldPlayers] = useState(
     JSON.parse(localStorage.getItem("randomBidsPlayer") || "[]")
   );
+  const [unsoldPlayers, setUnsoldPlayers] = useState(
+    JSON.parse(localStorage.getItem("randomBidsUnsoldPlayers") || "[]")
+  );
+  const [showUnsoldPlayers, setShowUnsoldPlayers] = useState(false);
 
   const positions = ["Co-Leader", "Elder", "Member"];
 
@@ -30,7 +34,8 @@ const RandomBid = () => {
   const availablePlayers = playersData.players.filter(
     (player) =>
       player.position.toLowerCase() === selectedPosition.toLowerCase() &&
-      !soldPlayers.some((sold) => sold.id === player.id)
+      !soldPlayers.some((sold) => sold.id === player.id) &&
+      !unsoldPlayers.some((unsold) => unsold.id === player.id)
   );
 
   const handleRandomSelect = () => {
@@ -91,6 +96,24 @@ const RandomBid = () => {
         selectedPlayer.sold ? "updated" : "added"
       } successfully!`
     );
+  };
+
+  const markAsUnsold = () => {
+    if (!selectedPlayer) return;
+
+    const updatedUnsoldPlayers = [...unsoldPlayers, selectedPlayer];
+    setUnsoldPlayers(updatedUnsoldPlayers);
+    localStorage.setItem("randomBidsUnsoldPlayers", JSON.stringify(updatedUnsoldPlayers));
+    setSelectedPlayer(null);
+    setSelectedTeam(null);
+    toast.success(`${selectedPlayer.name} marked as unsold`);
+  };
+
+  const moveToBidding = (player) => {
+    const newUnsoldPlayers = unsoldPlayers.filter(p => p.id !== player.id);
+    setUnsoldPlayers(newUnsoldPlayers);
+    localStorage.setItem("randomBidsUnsoldPlayers", JSON.stringify(newUnsoldPlayers));
+    setSelectedPlayer(player);
   };
 
   const getPositionIcon = (position) => {
@@ -284,6 +307,44 @@ const RandomBid = () => {
           )}
         </div>
 
+        {/* Add toggle button for unsold players */}
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => setShowUnsoldPlayers(!showUnsoldPlayers)}
+            className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg"
+          >
+            {showUnsoldPlayers ? "Hide Unsold Players" : "Show Unsold Players"}
+          </button>
+        </div>
+
+        {/* Add Unsold Players Section */}
+        {showUnsoldPlayers && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold mb-6 text-white">Unsold Players</h2>
+            {unsoldPlayers.filter((p) => p.position.toLowerCase() === selectedPosition.toLowerCase()).length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+                {unsoldPlayers
+                  .filter((p) => p.position.toLowerCase() === selectedPosition.toLowerCase())
+                  .map((player) => (
+                    <div
+                      key={player.id}
+                      onClick={() => moveToBidding(player)}
+                      className="bg-red-900/50 rounded-xl p-6 shadow-lg transform 
+                        hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+                    >
+                      <h3 className="text-xl font-bold text-white">{player.name}</h3>
+                      <p className="text-white/90 capitalize">{player.position}</p>
+                    </div>
+                  ))}
+              </div>
+            ) : (
+              <div className="bg-gray-900 rounded-xl p-8 text-center">
+                <p className="text-gray-400 text-xl">No unsold players</p>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Fixed Modal Positioning */}
         <AnimatePresence>
           {selectedPlayer && (
@@ -372,13 +433,22 @@ const RandomBid = () => {
                   })}
                 </div>
 
-                <button
-                  onClick={markAsSold}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white 
-                    font-bold py-4 text-xl rounded-lg shadow-lg transition-colors"
-                >
-                  Confirm Selection
-                </button>
+                <div className="flex gap-4 mt-4">
+                  <button
+                    onClick={markAsSold}
+                    className="flex-1 bg-green-500 hover:bg-green-600 text-white 
+                      font-bold py-4 text-xl rounded-lg shadow-lg transition-colors"
+                  >
+                    Confirm Selection
+                  </button>
+                  <button
+                    onClick={markAsUnsold}
+                    className="flex-1 bg-gray-500 hover:bg-red-600 text-white 
+                      font-bold py-4 text-xl rounded-lg shadow-lg transition-colors"
+                  >
+                    Mark as Unsold
+                  </button>
+                </div>
               </motion.div>
             </>
           )}
