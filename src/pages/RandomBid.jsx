@@ -42,7 +42,7 @@ const RandomBid = () => {
     if (availablePlayers.length === 0) return;
 
     setIsAnimating(true);
-    const totalTime = 3000;
+    const totalTime = 2000;
     const intervalTime = 150;
     const intervals = Math.floor(totalTime / intervalTime);
 
@@ -361,7 +361,7 @@ const RandomBid = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.5, opacity: 0 }}
                 className="fixed z-[101] bg-gray-900 rounded-xl p-8 shadow-2xl
-                  border border-gray-700 w-[90%] max-w-2xl left-[5%] md:left-[35%]"
+                  border border-gray-700 w-[90%] max-w-2xl left-[5%] md:left-[30%]"
                 style={{
                   top: "30%",
                   // left: "40%",
