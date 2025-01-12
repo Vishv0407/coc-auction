@@ -19,25 +19,6 @@ const AdminNavbar = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const sidebarVariants = {
-    open: {
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
-    },
-    closed: {
-      x: "-100%",
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
-    }
-  };
-
   const menuVariants = {
     open: {
       x: 0,
@@ -151,7 +132,7 @@ const AdminNavbar = () => {
         <span>Random Bids</span>
       </Link>
 
-      <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+      {/* <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
         <button
           onClick={handleClearStorage}
           className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg
@@ -161,7 +142,7 @@ const AdminNavbar = () => {
           <FaTimes />
           <span>Clear Random Bids</span>
         </button>
-      </div>
+      </div> */}
     </nav>
   );
 

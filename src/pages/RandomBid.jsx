@@ -24,12 +24,12 @@ const RandomBid = () => {
     JSON.parse(localStorage.getItem("randomBidsPlayer") || "[]")
   );
 
-  const positions = ["co-leader", "elder", "member"];
+  const positions = ["Co-Leader", "Elder", "Member"];
 
   // Filter available players
   const availablePlayers = playersData.players.filter(
     (player) =>
-      player.position === selectedPosition &&
+      player.position.toLowerCase() === selectedPosition.toLowerCase() &&
       !soldPlayers.some((sold) => sold.id === player.id)
   );
 
@@ -109,6 +109,25 @@ const RandomBid = () => {
       {getPositionIcon(position)}
     </div>
   );
+
+  const getTeamPositionCounts = (teamName) => {
+    const teamPlayers = soldPlayers.filter(player => player.team === teamName);
+    return {
+      'co-leader': teamPlayers.filter(p => p.position.toLowerCase() === 'co-leader').length,
+      'elder': teamPlayers.filter(p => p.position.toLowerCase() === 'elder').length,
+      'member': teamPlayers.filter(p => p.position.toLowerCase() === 'member').length
+    };
+  };
+
+  const isTeamPositionFull = (teamName, position) => {
+    const counts = getTeamPositionCounts(teamName);
+    const limits = {
+      'co-leader': 4,
+      'elder': 16,
+      'member': 16
+    };
+    return counts[position.toLowerCase()] >= limits[position.toLowerCase()];
+  };
 
   return (
     <div className="min-h-screen bg-[#010815] pt-8 md:pt-6 p-4 relative">
@@ -214,11 +233,11 @@ const RandomBid = () => {
           <h2 className="text-2xl font-bold mb-6 text-white">
             Selected Players
           </h2>
-          {soldPlayers.filter((p) => p.position === selectedPosition).length >
+          {soldPlayers.filter((p) => p.position.toLowerCase() === selectedPosition.toLowerCase()).length >
           0 ? (
             <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
               {soldPlayers
-                .filter((p) => p.position === selectedPosition)
+                .filter((p) => p.position.toLowerCase() === selectedPosition.toLowerCase())
                 .map((player) => {
                   const teamInfo = teamData[player.team];
                   return (
@@ -281,7 +300,7 @@ const RandomBid = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.5, opacity: 0 }}
                 className="fixed z-[101] bg-gray-900 rounded-xl p-8 shadow-2xl
-                  border border-gray-700 w-[90%] max-w-md left-[5%] md:left-[40%]"
+                  border border-gray-700 w-[90%] max-w-2xl left-[5%] md:left-[35%]"
                 style={{
                   top: "30%",
                   // left: "40%",
@@ -309,34 +328,54 @@ const RandomBid = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  {Object.entries(teamData).map(([teamName, data]) => (
-                    <button
-                      key={teamName}
-                      onClick={() => setSelectedTeam(teamName)}
-                      className={`${data.color} p-4 rounded-lg text-white
-                        ${
-                          selectedTeam === teamName
-                            ? "ring-2 ring-blue-500"
+                  {Object.entries(teamData).map(([teamName, data]) => {
+                    const counts = getTeamPositionCounts(teamName);
+                    const isDisabled = isTeamPositionFull(teamName, selectedPlayer.position);
+                    const positionLimit = {
+                      'co-leader': 4,
+                      'elder': 16,
+                      'member': 16
+                    }[selectedPlayer.position.toLowerCase()];
+                    
+                    const currentCount = counts[selectedPlayer.position.toLowerCase()];
+                    
+                    return (
+                      <button
+                        key={teamName}
+                        onClick={() => setSelectedTeam(teamName)}
+                        disabled={isDisabled}
+                        className={`${data.color} p-4 py-6 text-2xl rounded-lg text-white
+                          ${selectedTeam === teamName 
+                            ? "ring-4 ring-white transform scale-102 shadow-lg" 
                             : ""
-                        }
-                        hover:opacity-90 transition-all duration-300`}
-                    >
-                      <div className="flex items-center justify-center space-x-2">
-                        <img
-                          src={data.icon}
-                          alt={teamName}
-                          className="w-7 h-7"
-                        />
-                        <span className="font-bold">{teamName}</span>
-                      </div>
-                    </button>
-                  ))}
+                          }
+                          ${isDisabled ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"}
+                          transition-all duration-300`}
+                      >
+                        <div className="flex flex-col items-center justify-center space-y-2">
+                          <div className="flex items-center justify-center space-x-2">
+                            <img
+                              src={data.icon}
+                              alt={teamName}
+                              className="w-7 h-7"
+                            />
+                            <span className="font-bold">{teamName}</span>
+                          </div>
+                          <div className="text-sm">
+                            <p className="capitalize">
+                              {selectedPlayer.position}s: {currentCount}/{positionLimit}
+                            </p>
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
 
                 <button
                   onClick={markAsSold}
                   className="w-full bg-green-500 hover:bg-green-600 text-white 
-                    font-bold py-3 rounded-lg shadow-lg transition-colors"
+                    font-bold py-4 text-xl rounded-lg shadow-lg transition-colors"
                 >
                   Confirm Selection
                 </button>
