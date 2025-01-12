@@ -131,7 +131,7 @@ const RandomBid = () => {
 
   return (
     <div className="min-h-screen bg-[#010815] pt-8 md:pt-6 p-4 relative">
-      <div className="max-w-full px-20 mx-auto pb-24">
+      <div className="max-w-full sm:px-20 mx-auto pb-24 mt-12 sm:mt-0 ">
         <Link
           to="/adminpage/dashboard"
           className="inline-flex items-center text-gray-300 hover:text-white transition-colors mb-6"

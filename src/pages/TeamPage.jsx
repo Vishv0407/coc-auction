@@ -21,7 +21,7 @@ const TeamPage = () => {
 
   const clanLeaders = [
     { name: "Vishv Boda", clan: "Barbarians", codolio_link: "https://codolio.com/profile/vishv0407" },
-    { name: "Meet Rathi", clan: "Giants", codolio_link: "https://codolio.com/profile" },
+    { name: "Meet Rathi", clan: "Giants", codolio_link: "https://codolio.com/profile/meetrathi_97" },
     { name: "Jay Shah", clan: "Pekkas", codolio_link: "https://codolio.com/profile/jays" },
     { name: "Dev Kansara", clan: "Wizards", codolio_link: "https://codolio.com/profile/DevKansara97" },
   ].filter(leader => leader.clan === teamName.charAt(0).toUpperCase() + teamName.slice(1));
