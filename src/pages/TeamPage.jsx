@@ -11,7 +11,7 @@ const TeamPage = () => {
   const { teamName } = useParams();
   const { players: soldPlayers } = useWebSocket();
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('price');
+  const [sortBy, setSortBy] = useState('position');
   const [allPlayers, setAllPlayers] = useState([]);
 
   const navigate = useNavigate();
@@ -38,7 +38,15 @@ const TeamPage = () => {
 
   const sortedPlayers = [...allPlayers].sort((a, b) => {
     if (sortBy === 'price') return b.price - a.price;
-    return a.name.localeCompare(b.name);
+    
+    // Position priority order
+    const positionOrder = {
+      'co-leader': 1,
+      'elder': 2,
+      'member': 3
+    };
+    
+    return positionOrder[a.position.toLowerCase()] - positionOrder[b.position.toLowerCase()];
   });
 
   const filteredPlayers = sortedPlayers.filter(player =>
@@ -89,7 +97,7 @@ const TeamPage = () => {
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
           <div className="flex justify-center mb-6">
             <motion.img
@@ -110,7 +118,7 @@ const TeamPage = () => {
           animate={{ y: 0, opacity: 1 }}
           className="bg-white dark:bg-gray-900 w-full md:w-[40%] mx-auto rounded-xl shadow-lg p-6 mb-8"
         >
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Clan Leader</h2>
+          <h2 className="text-[22px] sm:text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Clan Leader</h2>
           <div className="grid grid-cols-1 gap-4">
             {clanLeaders.map((leader, index) => (
               <div key={index} className="flex justify-center items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -134,23 +142,23 @@ const TeamPage = () => {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12"
+            className="grid grid-cols-3 gap-3 sm:gap-6 max-w-3xl mx-auto"
           >
-            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4">
-              <p className="text-gray-600 dark:text-gray-300">Players</p>
-              <p className="text-3xl font-bold dark:text-gray-200">{allPlayers.length}</p>
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-2 sm:p-4">
+              <p className="text-gray-600 dark:text-gray-300 text-[13px] sm:text-base ">Players</p>
+              <p className="text-lg sm:text-3xl font-bold dark:text-gray-200">{allPlayers.length}</p>
             </div>
-            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4">
-              <p className="text-gray-600 dark:text-gray-200">Spent</p>
-              <div className="text-3xl font-bold flex gap-[1px] items-center justify-center dark:text-gray-200"> 
-                <SiElixir className='text-[#E11ADB] text-[24px] rotate-[25deg]'/>
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-2 sm:p-4">
+              <p className="text-gray-600 dark:text-gray-200 text-[13px] sm:text-base">Spent</p>
+              <div className="text-lg sm:text-3xl font-bold flex gap-[1px] items-center justify-center dark:text-gray-200"> 
+                <SiElixir className='text-[#E11ADB] text-[16px] sm:text-[24px] rotate-[25deg]'/>
                 {totalSpent.toLocaleString()}
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4">
-              <p className="text-gray-600 dark:text-gray-300">Remaining</p>
-              <div className="text-3xl font-bold flex gap-[1px] items-center justify-center dark:text-gray-200"> 
-                <SiElixir className='text-[#E11ADB] text-[24px] rotate-[25deg]'/>
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-2 sm:p-4">
+              <p className="text-gray-600 dark:text-gray-300 text-[13px] sm:text-base">Remaining</p>
+              <div className="text-lg sm:text-3xl font-bold flex gap-[1px] items-center justify-center dark:text-gray-200"> 
+                <SiElixir className='text-[#E11ADB] text-[16px] sm:text-[24px] rotate-[25deg]'/>
                 {remainingBalance.toLocaleString()}
               </div>
             </div>
@@ -163,7 +171,7 @@ const TeamPage = () => {
           animate={{ y: 0, opacity: 1 }}
           className="bg-white dark:bg-[#030e21] rounded-xl shadow-lg p-6 mb-8"
         >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-4">
             <div className="relative flex-1">
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
@@ -176,12 +184,13 @@ const TeamPage = () => {
               />
             </div>
             <button
-              onClick={() => setSortBy(sortBy === 'price' ? 'name' : 'price')}
+              onClick={() => setSortBy(sortBy === 'price' ? 'position' : 'price')}
               className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200
-                         transition-colors"
+                         transition-colors dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 whitespace-nowrap"
             >
               <FaSort />
-              Sort by {sortBy === 'price' ? 'Name' : 'Price'}
+              <span className="hidden sm:inline">Sort by </span>
+              {sortBy === 'price' ? 'Position' : 'Price'}
             </button>
           </div>
         </motion.div>
