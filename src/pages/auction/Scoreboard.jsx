@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { FaSearch, FaTrophy, FaCrown } from 'react-icons/fa';
 import { GiQueenCrown, GiCrownedSkull } from "react-icons/gi";
 import { HiUserGroup } from "react-icons/hi";
-import playersData from '../data/players.json';
-import { teamData } from '../constants/teamData';
+import playersData from '../../data/players.json';
+import { teamData } from '../../constants/teamData';
 
 const getPositionIcon = (position) => {
   switch (position.toLowerCase()) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SiElixir } from "react-icons/si";
 import { format } from 'date-fns';
-import { teamData } from '../constants/teamData';
+import { teamData } from '../../constants/teamData';
 
 const AdminLogs = () => {
   const [logs, setLogs] = useState([]);

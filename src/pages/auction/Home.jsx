@@ -1,10 +1,10 @@
 import React from 'react';
-import { useWebSocket } from '../context/WebSocketContext';
+import { useWebSocket } from '../../context/WebSocketContext';
 import { Link } from 'react-router-dom';
-import { teamData } from '../constants/teamData';
+import { teamData } from '../../constants/teamData';
 import { FaTrophy, FaUsers, FaCoins } from 'react-icons/fa';
 import { SiElixir } from "react-icons/si";
-import  pclublogo  from "../assets/pclublogo.png"
+import  pclublogo  from "../../assets/pclublogo.png"
 
 const Home = () => {
   const { players: soldPlayers } = useWebSocket();

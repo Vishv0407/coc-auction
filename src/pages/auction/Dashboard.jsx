@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useWebSocket } from '../context/WebSocketContext';
-import { teamData } from '../constants/teamData';
+import { useWebSocket } from '../../context/WebSocketContext';
+import { teamData } from '../../constants/teamData';
 import { FaSearch, FaSort, FaUsers } from 'react-icons/fa';
-import playersData from '../data/players.json';
+import playersData from '../../data/players.json';
 import { IoWallet } from "react-icons/io5";
 import { SiElixir } from "react-icons/si";
 

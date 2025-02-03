@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { useWebSocket } from '../context/WebSocketContext';
-import { teamData } from '../constants/teamData';
+import { useWebSocket } from '../../context/WebSocketContext';
+import { teamData } from '../../constants/teamData';
 import { FaSearch, FaSort, FaArrowLeft, FaUser, FaCrown, FaUserTie } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import playersData from '../data/players.json';
+import playersData from '../../data/players.json';
 import { SiElixir } from "react-icons/si";
 
 const TeamPage = () => {

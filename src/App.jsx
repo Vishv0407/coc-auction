@@ -8,17 +8,17 @@ import {
 import { WebSocketProvider } from "./context/WebSocketContext";
 import Navbar from "./components/Navbar";
 import AdminNavbar from "./components/AdminNavbar";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import TeamPage from "./pages/TeamPage";
+import Home from "./pages/auction/Home";
+import Dashboard from "./pages/auction/Dashboard";
+import TeamPage from "./pages/auction/TeamPage";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
-import Scoreboard from "./pages/Scoreboard";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminLogs from "./pages/AdminLogs";
+import Scoreboard from "./pages/auction/Scoreboard";
+import AdminDashboard from "./pages/auction/AdminDashboard";
+import AdminLogs from "./pages/auction/AdminLogs";
 import RequireAuth from "./components/RequireAuth";
 import NotFound from "./pages/NotFound";
-import RandomBid from "./pages/RandomBid";
+import RandomBid from "./pages/auction/RandomBid";
 
 function AppContent() {
   const location = useLocation();

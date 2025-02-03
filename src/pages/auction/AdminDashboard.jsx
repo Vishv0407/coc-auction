@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useWebSocket } from "../context/WebSocketContext";
-import playersData from "../data/players.json";
-import { teamData } from "../constants/teamData";
+import { useWebSocket } from "../../context/WebSocketContext";
+import playersData from "../../data/players.json";
+import { teamData } from "../../constants/teamData";
 import { FaTimes, FaSearch } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { SiElixir } from "react-icons/si";

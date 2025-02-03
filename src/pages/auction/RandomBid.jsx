@@ -10,8 +10,8 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import playersData from "../data/players.json";
-import { teamData } from "../constants/teamData";
+import playersData from "../../data/players.json";
+import { teamData } from "../../constants/teamData";
 import toast from "react-hot-toast";
 
 const RandomBid = () => {
