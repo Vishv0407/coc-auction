@@ -1,8 +1,111 @@
-# React + Vite
+# Clash of Codes 3.0 Auction Platform 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic real-time auction platform built for Ahmedabad University's Programming Club's "Clash of Codes 3.0" coding tournament. This platform facilitates team-based player auctions, featuring live bidding, team management, and comprehensive player statistics.
 
-Currently, two official plugins are available:
+![Clash of Codes Logo](./src/assets/pclublogo.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+
+### 🔄 Real-time Bidding System
+- Live WebSocket integration for instant bid updates
+- Dynamic player valuation based on coding performance 
+- Real-time wallet balance updates for teams
+- Instant notifications for bid activities
+
+### 👥 Team Management
+Four distinct teams with unique themes:
+- 🟡 **Barbarians** - Gold themed warriors
+- 🔴 **Giants** - Red themed powerhouses  
+- 🟣 **Pekkas** - Purple themed champions
+- 🔵 **Wizards** - Blue themed strategists
+
+Each team features:
+- Individual wallet tracking
+- Team-specific player rosters
+- Clan leader management
+- Budget monitoring
+
+### 📊 Player Statistics
+Comprehensive player profiles including:
+- Position ranking (Co-Leader, Elder, Member)
+- Best scores from coding rounds
+- Individual performance metrics (Q1 & Q2 scores)
+- Codolio profile integration
+- Current auction status
+
+### ⚙️ Admin Controls
+- Secure admin dashboard
+- Transaction logging system
+- Player management interface
+- Bid history tracking
+- Random bid generator for practice
+
+### 🎨 User Interface
+- Dark/Light theme toggle
+- Responsive design for all devices
+- Animated transitions using Framer Motion
+- Real-time search and filtering
+- Interactive leaderboards
+
+### 🛠️ Technical Stack
+
+#### Frontend
+- React 18 with Vite
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Socket.io client for real-time updates
+- React Router for navigation
+
+#### Backend
+- Node.js with Express
+- MongoDB for data persistence
+- Socket.io for WebSocket connections
+- RESTful API architecture
+
+## 🎯 Special Features
+
+### Tournament Integration
+- Advanced player ranking system
+- Score-based valuations
+- Position-based categorization
+- Team formation rules
+
+### Analytics
+- Team performance tracking
+- Player value analysis
+- Historical transaction viewing
+- Budget utilization metrics
+
+### Security
+- Protected admin routes
+- Environment variable configuration
+- CORS protection
+- Secure WebSocket connections
+
+## 🌟 Unique Aspects
+
+- **Random Bid Generator**: Practice feature for teams
+- **Real-time Synchronization**: Instant updates across all clients
+- **Comprehensive Logging**: Complete transaction history
+- **Flexible Team Management**: Dynamic team composition
+- **Interactive UI**: Engaging user experience
+- **Performance Metrics**: Detailed player statistics
+
+
+## 📝 Project Context
+
+This platform was developed for Ahmedabad University's Programming Club's "Clash of Codes" tournament. It serves as a sophisticated auction system that combines real-time functionality with comprehensive team management features, providing an engaging experience for participants.
+
+## 🐛 Bug Reports
+
+Found a bug? Have a suggestion? Feel free to report it!
+
+Contact: [vishvboda0407@gmail.com](mailto:vishvboda0407@gmail.com)
+
+We appreciate your feedback in making this platform better.
+
+---
+
+*Note: This is a read-only project showcase demonstrating the implementation of a real-time auction system for coding tournaments. The platform is currently in use for the Clash of Codes 3.0 tournament.*
+
+Created with 💻 by [Vishv Boda](https://www.linkedin.com/in/vishv-boda-806ab5289/)
