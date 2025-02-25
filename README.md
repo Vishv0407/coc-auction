@@ -2,13 +2,15 @@
 
 A dynamic real-time auction platform built for Ahmedabad University's Programming Club's "Clash of Codes 3.0" coding tournament. This platform facilitates team-based player auctions, featuring live bidding, team management, and comprehensive player statistics.
 
-![Clash of Codes Logo](./src/assets/pclublogo.png)
-
 ## Screenshots
-![Image](https://github.com/user-attachments/assets/1dbf77c5-9d3d-48f7-b4af-6d2b68838d0f)
-![Image](https://github.com/user-attachments/assets/00649143-a04e-4038-bd5b-f82d9c20ad4c)
+### Home Page
 ![Image](https://github.com/user-attachments/assets/49d51295-4767-4da6-82dc-5911a983c413)
-![Image](https://github.com/user-attachments/assets/12a99d87-39db-427e-a1bc-dd985e4d501e)
+
+### Live Dashboard Page
+![Image](https://github.com/user-attachments/assets/1dbf77c5-9d3d-48f7-b4af-6d2b68838d0f)
+
+### Each team details Page
+![Image](https://github.com/user-attachments/assets/00649143-a04e-4038-bd5b-f82d9c20ad4c)
 
 ## ✨ Features
 
